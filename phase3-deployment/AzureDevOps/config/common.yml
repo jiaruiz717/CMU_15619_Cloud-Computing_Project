@@ -1,0 +1,8 @@
+variables:
+  # Azure Resource Manager service connection, preferably workload identity federation.
+  azureServiceConnection: sc-dwendwen-azure
+  location: eastus
+  # Globally unique, 5-50 lowercase alphanumeric characters. Replace before use.
+  acrName: replacedwendwenacr
+  # Object ID of the service connection's enterprise application (NOT its client ID).
+  pipelinePrincipalObjectId: REPLACE_WITH_SERVICE_PRINCIPAL_OBJECT_ID

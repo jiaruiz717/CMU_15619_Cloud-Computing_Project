@@ -1,0 +1,13 @@
+@host = http://localhost:8083
+
+### Requires existing ETL data for user 123
+GET {{host}}/twitter?user_id=123&type=both&phrase=hello&hashtag=cloud
+
+### Reply contacts only
+GET {{host}}/twitter?user_id=123&type=reply&phrase=hello&hashtag=cloud
+
+### Retweet contacts only
+GET {{host}}/twitter?user_id=123&type=retweet&phrase=hello&hashtag=cloud
+
+### Invalid type returns the team header followed by INVALID
+GET {{host}}/twitter?user_id=123&type=unknown&phrase=hello&hashtag=cloud

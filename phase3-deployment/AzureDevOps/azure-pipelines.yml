@@ -1,0 +1,121 @@
+# Select this YAML path when creating the application pipeline in Azure DevOps.
+name: dwendwen-$(Date:yyyyMMdd)-$(Rev:r)
+trigger:
+  branches:
+    include: [main, master]
+  paths:
+    include: [web, phase3-deployment/AzureDevOps]
+pr:
+  branches:
+    include: [main, master]
+  paths:
+    include: [web, phase3-deployment/AzureDevOps]
+
+parameters:
+- name: stack
+  type: string
+  default: dotnet
+  values: [dotnet, vertx, jooby]
+- name: environment
+  type: string
+  default: dev
+  values: [dev, prod]
+- name: includeMix
+  type: boolean
+  default: false
+- name: deploy
+  type: boolean
+  default: true
+
+variables:
+- template: config/common.yml
+- template: config/${{ parameters.environment }}.yml
+- name: imageTag
+  value: '$(Build.BuildId)'
+
+pool:
+  vmImage: ubuntu-22.04
+
+stages:
+- stage: Validate
+  jobs:
+  - job: ValidateChart
+    steps:
+    - checkout: self
+    - task: HelmInstaller@1
+      inputs:
+        helmVersionToInstall: '3.17.3'
+    - bash: |
+        set -euo pipefail
+        if [[ "$STACK" == dotnet && "${INCLUDE_MIX,,}" == true ]]; then
+          echo 'mix_dotnet does not exist; choose includeMix=false or a Java stack.' >&2
+          exit 1
+        fi
+        for script in phase3-deployment/AzureDevOps/scripts/*.sh; do
+          bash -n "$script"
+        done
+        chart=phase3-deployment/AzureDevOps/helm/dwendwen
+        helm lint "$chart" --set-string image.stack="$STACK" --set services.mix.enabled="${INCLUDE_MIX,,}"
+        helm template dwendwen "$chart" \
+          -f "$chart/values.$TARGET_ENV.yaml" \
+          --set-string image.stack="$STACK" \
+          --set services.mix.enabled="${INCLUDE_MIX,,}" > /dev/null
+      displayName: Validate scripts and Helm templates
+      env:
+        STACK: ${{ parameters.stack }}
+        INCLUDE_MIX: ${{ parameters.includeMix }}
+        TARGET_ENV: ${{ parameters.environment }}
+
+- stage: Build
+  dependsOn: Validate
+  jobs:
+  - template: templates/build-job.yml
+    parameters: { service: m1, stack: '${{ parameters.stack }}' }
+  - template: templates/build-job.yml
+    parameters: { service: m2, stack: '${{ parameters.stack }}' }
+  - template: templates/build-job.yml
+    parameters: { service: m3, stack: '${{ parameters.stack }}' }
+  - ${{ if eq(parameters.includeMix, true) }}:
+    - template: templates/build-job.yml
+      parameters: { service: mix, stack: '${{ parameters.stack }}' }
+
+- ${{ if eq(parameters.deploy, true) }}:
+  - stage: Deploy
+    dependsOn: Build
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), in(variables['Build.SourceBranch'], 'refs/heads/main', 'refs/heads/master'))
+    variables:
+    - group: dwendwen-${{ parameters.environment }}-secrets
+    jobs:
+    - deployment: DeployAKS
+      environment: dwendwen-${{ parameters.environment }}
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - checkout: self
+            - download: none
+            - task: HelmInstaller@1
+              inputs:
+                helmVersionToInstall: '3.17.3'
+            - task: AzureCLI@2
+              displayName: Deploy the same build-tagged images to AKS
+              inputs:
+                azureSubscription: $(azureServiceConnection)
+                scriptType: bash
+                scriptLocation: scriptPath
+                scriptPath: phase3-deployment/AzureDevOps/scripts/deploy.sh
+                workingDirectory: $(Build.SourcesDirectory)
+                visibleAzLogin: false
+              env:
+                RESOURCE_GROUP: $(resourceGroup)
+                AKS_NAME: $(aksName)
+                ACR_NAME: $(acrName)
+                K8S_NAMESPACE: $(kubernetesNamespace)
+                RELEASE_NAME: dwendwen
+                STACK: ${{ parameters.stack }}
+                INCLUDE_MIX: ${{ parameters.includeMix }}
+                TARGET_ENV: ${{ parameters.environment }}
+                IMAGE_TAG: $(imageTag)
+                MYSQL_HOST: $(mysqlHost)
+                MYSQL_USER: $(mysqlUser)
+                MYSQL_PASSWORD: $(mysqlPassword)

@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cc-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /qrcode
+        pathType: Prefix
+        backend:
+          service:
+            name: m1-service
+            port:
+              number: 80
+      - path: /blockchain
+        pathType: Prefix
+        backend:
+          service:
+            name: m2-service
+            port:
+              number: 80
+      - path: /twitter
+        pathType: Prefix
+        backend:
+          service:
+            name: m3-service
+            port:
+              number: 80

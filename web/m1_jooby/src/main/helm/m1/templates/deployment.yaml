@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: m1-deployment
+spec:
+  replicas: 30
+  selector:
+    matchLabels:
+      app: m1
+  template:
+    metadata:
+      labels:
+        app: m1
+    spec:
+      containers:
+      - name: m1
+        image: 144331934093.dkr.ecr.us-east-1.amazonaws.com/m1:jooby
+        ports:
+        - containerPort: 8080

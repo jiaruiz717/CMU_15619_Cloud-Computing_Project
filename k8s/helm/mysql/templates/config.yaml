@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+data:
+  primary.cnf: |
+    # Apply this config only on the primary.
+    [mysqld]
+    innodb_doublewrite=0
+    innodb_flush_log_at_trx_commit=2
+    secure-file-priv = ""
+    innodb_buffer_pool_size=8G
+    innodb_log_file_size=512M
+    innodb_read_io_threads=64
+    innodb_write_io_threads=64
+    innodb_io_capacity=5000
+    innodb_thread_concurrency=0    
+  replica.cnf: |
+    # Apply this config only on replicas.
+    [mysqld]
+    innodb_doublewrite=0
+    innodb_flush_log_at_trx_commit=2
+    secure-file-priv = ""
+    innodb_buffer_pool_size=8G
+    innodb_log_file_size=512M
+    innodb_read_io_threads=64
+    innodb_write_io_threads=64
+    innodb_io_capacity=5000
+    innodb_thread_concurrency=0   

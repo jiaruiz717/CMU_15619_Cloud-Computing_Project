@@ -1,0 +1,31 @@
+image:
+  registry: example.azurecr.io
+  stack: dotnet
+  tag: development
+  pullPolicy: IfNotPresent
+database:
+  existingSecret: dwendwen-mysql
+services:
+  m1:
+    enabled: true
+    replicas: 1
+  m2:
+    enabled: true
+    replicas: 1
+  m3:
+    enabled: true
+    replicas: 1
+  mix:
+    enabled: false
+    replicas: 1
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    cpu: '1'
+    memory: 768Mi
+gateway:
+  image: nginxinc/nginx-unprivileged:1.28-alpine
+  replicas: 1
+  serviceType: LoadBalancer

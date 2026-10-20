@@ -1,0 +1,1543 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "import org.apache.spark.sql.functions.{col,length}\nimport org.apache.spark.sql.types._\nval langList = List(\"ar\",\"en\",\"fr\",\"in\",\"pt\",\"es\",\"tr\",\"ja\") \n// val df = spark.read.json(\"gs://cmuccpublicdatasets/twitter/s22/part-r-00000.gz\")\nval df = spark.read.json(\"gs://cmuccpublicdatasets/twitter/s22\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T04:45:22+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.spark.SparkException: Job 106 cancelled part of cancelled job group zeppelin|anonymous|2GZWKMHSC|paragraph_1647718044335_1042794134\n  at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2259)\n  at org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:2155)\n  at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleJobGroupCancelled$4(DAGScheduler.scala:1048)\n  at scala.runtime.java8.JFunction1$mcVI$sp.apply(JFunction1$mcVI$sp.java:23)\n  at scala.collection.mutable.HashSet.foreach(HashSet.scala:79)\n  at org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:1047)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2408)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2388)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2377)\n  at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)\n  at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:868)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2204)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2299)\n  at org.apache.spark.sql.catalyst.json.JsonInferSchema.infer(JsonInferSchema.scala:94)\n  at org.apache.spark.sql.execution.datasources.json.TextInputJsonDataSource$.$anonfun$inferFromDataset$5(JsonDataSource.scala:110)\n  at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:163)\n  at org.apache.spark.sql.execution.datasources.json.TextInputJsonDataSource$.inferFromDataset(JsonDataSource.scala:110)\n  at org.apache.spark.sql.execution.datasources.json.TextInputJsonDataSource$.infer(JsonDataSource.scala:99)\n  at org.apache.spark.sql.execution.datasources.json.JsonDataSource.inferSchema(JsonDataSource.scala:65)\n  at org.apache.spark.sql.execution.datasources.json.JsonFileFormat.inferSchema(JsonFileFormat.scala:58)\n  at org.apache.spark.sql.execution.datasources.DataSource.$anonfun$getOrInferFileFormatSchema$11(DataSource.scala:209)\n  at scala.Option.orElse(Option.scala:447)\n  at org.apache.spark.sql.execution.datasources.DataSource.getOrInferFileFormatSchema(DataSource.scala:206)\n  at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:419)\n  at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:325)\n  at org.apache.spark.sql.DataFrameReader.$anonfun$load$3(DataFrameReader.scala:307)\n  at scala.Option.getOrElse(Option.scala:189)\n  at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:307)\n  at org.apache.spark.sql.DataFrameReader.json(DataFrameReader.scala:519)\n  at org.apache.spark.sql.DataFrameReader.json(DataFrameReader.scala:428)\n  ... 52 elided\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:37031/jobs/job?id=105",
+              "$$hashKey": "object:9200"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:37031/jobs/job?id=106",
+              "$$hashKey": "object:9201"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718044335_1042794134",
+      "id": "paragraph_1647718044335_1042794134",
+      "dateCreated": "2022-03-19T19:27:24+0000",
+      "dateStarted": "2022-03-22T04:45:22+0000",
+      "dateFinished": "2022-03-22T04:46:10+0000",
+      "status": "ABORT",
+      "focus": true,
+      "$$hashKey": "object:8288"
+    },
+    {
+      "text": "df.count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T19:53:13+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres74\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 328879\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=125",
+              "$$hashKey": "object:9263"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=126",
+              "$$hashKey": "object:9264"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647805990196_908915662",
+      "id": "paragraph_1647805990196_908915662",
+      "dateCreated": "2022-03-20T19:53:10+0000",
+      "dateStarted": "2022-03-20T19:53:13+0000",
+      "dateFinished": "2022-03-20T19:53:25+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8289"
+    },
+    {
+      "text": "df.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-21T00:33:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- contributors: string (nullable = true)\n |-- coordinates: struct (nullable = true)\n |    |-- coordinates: array (nullable = true)\n |    |    |-- element: double (containsNull = true)\n |    |-- type: string (nullable = true)\n |-- created_at: string (nullable = true)\n |-- delete: struct (nullable = true)\n |    |-- status: struct (nullable = true)\n |    |    |-- id: long (nullable = true)\n |    |    |-- id_str: string (nullable = true)\n |    |    |-- user_id: long (nullable = true)\n |    |    |-- user_id_str: string (nullable = true)\n |    |-- timestamp_ms: string (nullable = true)\n |-- display_text_range: array (nullable = true)\n |    |-- element: long (containsNull = true)\n |-- entities: struct (nullable = true)\n |    |-- hashtags: array (nullable = true)\n |    |    |-- element: struct (containsNull = true)\n |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |-- text: string (nullable = true)\n |    |-- media: array (nullable = true)\n |    |    |-- element: struct (containsNull = true)\n |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |-- id: long (nullable = true)\n |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |-- type: string (nullable = true)\n |    |    |    |-- url: string (nullable = true)\n |    |-- symbols: array (nullable = true)\n |    |    |-- element: struct (containsNull = true)\n |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |-- text: string (nullable = true)\n |    |-- trends: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- urls: array (nullable = true)\n |    |    |-- element: struct (containsNull = true)\n |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |-- url: string (nullable = true)\n |    |-- user_mentions: array (nullable = true)\n |    |    |-- element: struct (containsNull = true)\n |    |    |    |-- id: long (nullable = true)\n |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |-- name: string (nullable = true)\n |    |    |    |-- screen_name: string (nullable = true)\n |-- extended_entities: struct (nullable = true)\n |    |-- media: array (nullable = true)\n |    |    |-- element: struct (containsNull = true)\n |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |-- id: long (nullable = true)\n |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |-- type: string (nullable = true)\n |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |-- url: string (nullable = true)\n |-- extended_tweet: struct (nullable = true)\n |    |-- display_text_range: array (nullable = true)\n |    |    |-- element: long (containsNull = true)\n |    |-- entities: struct (nullable = true)\n |    |    |-- hashtags: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- text: string (nullable = true)\n |    |    |-- media: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- symbols: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- text: string (nullable = true)\n |    |    |-- urls: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- user_mentions: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- name: string (nullable = true)\n |    |    |    |    |-- screen_name: string (nullable = true)\n |    |-- extended_entities: struct (nullable = true)\n |    |    |-- media: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |-- full_text: string (nullable = true)\n |-- favorite_count: long (nullable = true)\n |-- favorited: boolean (nullable = true)\n |-- filter_level: string (nullable = true)\n |-- geo: struct (nullable = true)\n |    |-- coordinates: array (nullable = true)\n |    |    |-- element: double (containsNull = true)\n |    |-- type: string (nullable = true)\n |-- id: long (nullable = true)\n |-- id_str: string (nullable = true)\n |-- in_reply_to_screen_name: string (nullable = true)\n |-- in_reply_to_status_id: long (nullable = true)\n |-- in_reply_to_status_id_str: string (nullable = true)\n |-- in_reply_to_user_id: long (nullable = true)\n |-- in_reply_to_user_id_str: string (nullable = true)\n |-- is_quote_status: boolean (nullable = true)\n |-- lang: string (nullable = true)\n |-- place: struct (nullable = true)\n |    |-- attributes: struct (nullable = true)\n |    |    |-- street_address: string (nullable = true)\n |    |-- bounding_box: struct (nullable = true)\n |    |    |-- coordinates: array (nullable = true)\n |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |    |-- element: double (containsNull = true)\n |    |    |-- type: string (nullable = true)\n |    |-- contained_within: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- country: string (nullable = true)\n |    |-- country_code: string (nullable = true)\n |    |-- full_name: string (nullable = true)\n |    |-- id: string (nullable = true)\n |    |-- name: string (nullable = true)\n |    |-- place_type: string (nullable = true)\n |    |-- url: string (nullable = true)\n |-- possibly_sensitive: boolean (nullable = true)\n |-- quoted_status: struct (nullable = true)\n |    |-- contributors: array (nullable = true)\n |    |    |-- element: long (containsNull = true)\n |    |-- coordinates: struct (nullable = true)\n |    |    |-- coordinates: array (nullable = true)\n |    |    |    |-- element: double (containsNull = true)\n |    |    |-- type: string (nullable = true)\n |    |-- created_at: string (nullable = true)\n |    |-- display_text_range: array (nullable = true)\n |    |    |-- element: long (containsNull = true)\n |    |-- entities: struct (nullable = true)\n |    |    |-- hashtags: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- text: string (nullable = true)\n |    |    |-- media: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- symbols: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- text: string (nullable = true)\n |    |    |-- trends: array (nullable = true)\n |    |    |    |-- element: string (containsNull = true)\n |    |    |-- urls: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- user_mentions: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- name: string (nullable = true)\n |    |    |    |    |-- screen_name: string (nullable = true)\n |    |-- extended_entities: struct (nullable = true)\n |    |    |-- media: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |-- extended_tweet: struct (nullable = true)\n |    |    |-- display_text_range: array (nullable = true)\n |    |    |    |-- element: long (containsNull = true)\n |    |    |-- entities: struct (nullable = true)\n |    |    |    |-- hashtags: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- symbols: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |-- urls: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- user_mentions: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- name: string (nullable = true)\n |    |    |    |    |    |-- screen_name: string (nullable = true)\n |    |    |-- extended_entities: struct (nullable = true)\n |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- full_text: string (nullable = true)\n |    |-- favorite_count: long (nullable = true)\n |    |-- favorited: boolean (nullable = true)\n |    |-- filter_level: string (nullable = true)\n |    |-- geo: struct (nullable = true)\n |    |    |-- coordinates: array (nullable = true)\n |    |    |    |-- element: double (containsNull = true)\n |    |    |-- type: string (nullable = true)\n |    |-- id: long (nullable = true)\n |    |-- id_str: string (nullable = true)\n |    |-- in_reply_to_screen_name: string (nullable = true)\n |    |-- in_reply_to_status_id: long (nullable = true)\n |    |-- in_reply_to_status_id_str: string (nullable = true)\n |    |-- in_reply_to_user_id: long (nullable = true)\n |    |-- in_reply_to_user_id_str: string (nullable = true)\n |    |-- is_quote_status: boolean (nullable = true)\n |    |-- lang: string (nullable = true)\n |    |-- place: struct (nullable = true)\n |    |    |-- bounding_box: struct (nullable = true)\n |    |    |    |-- coordinates: array (nullable = true)\n |    |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |    |    |-- element: double (containsNull = true)\n |    |    |    |-- type: string (nullable = true)\n |    |    |-- country: string (nullable = true)\n |    |    |-- country_code: string (nullable = true)\n |    |    |-- full_name: string (nullable = true)\n |    |    |-- id: string (nullable = true)\n |    |    |-- name: string (nullable = true)\n |    |    |-- place_type: string (nullable = true)\n |    |    |-- url: string (nullable = true)\n |    |-- possibly_sensitive: boolean (nullable = true)\n |    |-- quoted_status_id: long (nullable = true)\n |    |-- quoted_status_id_str: string (nullable = true)\n |    |-- retweet_count: long (nullable = true)\n |    |-- retweeted: boolean (nullable = true)\n |    |-- scopes: struct (nullable = true)\n |    |    |-- followers: boolean (nullable = true)\n |    |    |-- place_ids: array (nullable = true)\n |    |    |    |-- element: string (containsNull = true)\n |    |-- source: string (nullable = true)\n |    |-- text: string (nullable = true)\n |    |-- truncated: boolean (nullable = true)\n |    |-- user: struct (nullable = true)\n |    |    |-- contributors_enabled: boolean (nullable = true)\n |    |    |-- created_at: string (nullable = true)\n |    |    |-- default_profile: boolean (nullable = true)\n |    |    |-- default_profile_image: boolean (nullable = true)\n |    |    |-- description: string (nullable = true)\n |    |    |-- favourites_count: long (nullable = true)\n |    |    |-- follow_request_sent: string (nullable = true)\n |    |    |-- followers_count: long (nullable = true)\n |    |    |-- following: string (nullable = true)\n |    |    |-- friends_count: long (nullable = true)\n |    |    |-- geo_enabled: boolean (nullable = true)\n |    |    |-- id: long (nullable = true)\n |    |    |-- id_str: string (nullable = true)\n |    |    |-- is_translator: boolean (nullable = true)\n |    |    |-- lang: string (nullable = true)\n |    |    |-- listed_count: long (nullable = true)\n |    |    |-- location: string (nullable = true)\n |    |    |-- name: string (nullable = true)\n |    |    |-- notifications: string (nullable = true)\n |    |    |-- profile_background_color: string (nullable = true)\n |    |    |-- profile_background_image_url: string (nullable = true)\n |    |    |-- profile_background_image_url_https: string (nullable = true)\n |    |    |-- profile_background_tile: boolean (nullable = true)\n |    |    |-- profile_banner_url: string (nullable = true)\n |    |    |-- profile_image_url: string (nullable = true)\n |    |    |-- profile_image_url_https: string (nullable = true)\n |    |    |-- profile_link_color: string (nullable = true)\n |    |    |-- profile_sidebar_border_color: string (nullable = true)\n |    |    |-- profile_sidebar_fill_color: string (nullable = true)\n |    |    |-- profile_text_color: string (nullable = true)\n |    |    |-- profile_use_background_image: boolean (nullable = true)\n |    |    |-- protected: boolean (nullable = true)\n |    |    |-- screen_name: string (nullable = true)\n |    |    |-- statuses_count: long (nullable = true)\n |    |    |-- time_zone: string (nullable = true)\n |    |    |-- url: string (nullable = true)\n |    |    |-- utc_offset: long (nullable = true)\n |    |    |-- verified: boolean (nullable = true)\n |    |-- withheld_copyright: boolean (nullable = true)\n |    |-- withheld_in_countries: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |-- quoted_status_id: long (nullable = true)\n |-- quoted_status_id_str: string (nullable = true)\n |-- retweet_count: long (nullable = true)\n |-- retweeted: boolean (nullable = true)\n |-- retweeted_status: struct (nullable = true)\n |    |-- contributors: array (nullable = true)\n |    |    |-- element: long (containsNull = true)\n |    |-- coordinates: struct (nullable = true)\n |    |    |-- coordinates: array (nullable = true)\n |    |    |    |-- element: double (containsNull = true)\n |    |    |-- type: string (nullable = true)\n |    |-- created_at: string (nullable = true)\n |    |-- display_text_range: array (nullable = true)\n |    |    |-- element: long (containsNull = true)\n |    |-- entities: struct (nullable = true)\n |    |    |-- hashtags: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- text: string (nullable = true)\n |    |    |-- media: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- symbols: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- text: string (nullable = true)\n |    |    |-- trends: array (nullable = true)\n |    |    |    |-- element: string (containsNull = true)\n |    |    |-- urls: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- user_mentions: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- name: string (nullable = true)\n |    |    |    |    |-- screen_name: string (nullable = true)\n |    |-- extended_entities: struct (nullable = true)\n |    |    |-- media: array (nullable = true)\n |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |-- extended_tweet: struct (nullable = true)\n |    |    |-- display_text_range: array (nullable = true)\n |    |    |    |-- element: long (containsNull = true)\n |    |    |-- entities: struct (nullable = true)\n |    |    |    |-- hashtags: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- symbols: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |-- urls: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- user_mentions: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- name: string (nullable = true)\n |    |    |    |    |    |-- screen_name: string (nullable = true)\n |    |    |-- extended_entities: struct (nullable = true)\n |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- full_text: string (nullable = true)\n |    |-- favorite_count: long (nullable = true)\n |    |-- favorited: boolean (nullable = true)\n |    |-- filter_level: string (nullable = true)\n |    |-- geo: struct (nullable = true)\n |    |    |-- coordinates: array (nullable = true)\n |    |    |    |-- element: double (containsNull = true)\n |    |    |-- type: string (nullable = true)\n |    |-- id: long (nullable = true)\n |    |-- id_str: string (nullable = true)\n |    |-- in_reply_to_screen_name: string (nullable = true)\n |    |-- in_reply_to_status_id: long (nullable = true)\n |    |-- in_reply_to_status_id_str: string (nullable = true)\n |    |-- in_reply_to_user_id: long (nullable = true)\n |    |-- in_reply_to_user_id_str: string (nullable = true)\n |    |-- is_quote_status: boolean (nullable = true)\n |    |-- lang: string (nullable = true)\n |    |-- place: struct (nullable = true)\n |    |    |-- attributes: struct (nullable = true)\n |    |    |    |-- street_address: string (nullable = true)\n |    |    |-- bounding_box: struct (nullable = true)\n |    |    |    |-- coordinates: array (nullable = true)\n |    |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |    |    |-- element: double (containsNull = true)\n |    |    |    |-- type: string (nullable = true)\n |    |    |-- contained_within: array (nullable = true)\n |    |    |    |-- element: string (containsNull = true)\n |    |    |-- country: string (nullable = true)\n |    |    |-- country_code: string (nullable = true)\n |    |    |-- full_name: string (nullable = true)\n |    |    |-- id: string (nullable = true)\n |    |    |-- name: string (nullable = true)\n |    |    |-- place_type: string (nullable = true)\n |    |    |-- url: string (nullable = true)\n |    |-- possibly_sensitive: boolean (nullable = true)\n |    |-- quoted_status: struct (nullable = true)\n |    |    |-- contributors: array (nullable = true)\n |    |    |    |-- element: long (containsNull = true)\n |    |    |-- coordinates: struct (nullable = true)\n |    |    |    |-- coordinates: array (nullable = true)\n |    |    |    |    |-- element: double (containsNull = true)\n |    |    |    |-- type: string (nullable = true)\n |    |    |-- created_at: string (nullable = true)\n |    |    |-- display_text_range: array (nullable = true)\n |    |    |    |-- element: long (containsNull = true)\n |    |    |-- entities: struct (nullable = true)\n |    |    |    |-- hashtags: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- symbols: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |-- trends: array (nullable = true)\n |    |    |    |    |-- element: string (containsNull = true)\n |    |    |    |-- urls: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- user_mentions: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- name: string (nullable = true)\n |    |    |    |    |    |-- screen_name: string (nullable = true)\n |    |    |-- extended_entities: struct (nullable = true)\n |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |-- extended_tweet: struct (nullable = true)\n |    |    |    |-- display_text_range: array (nullable = true)\n |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |-- entities: struct (nullable = true)\n |    |    |    |    |-- hashtags: array (nullable = true)\n |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |-- symbols: array (nullable = true)\n |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- text: string (nullable = true)\n |    |    |    |    |-- urls: array (nullable = true)\n |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |-- user_mentions: array (nullable = true)\n |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- name: string (nullable = true)\n |    |    |    |    |    |    |-- screen_name: string (nullable = true)\n |    |    |    |-- extended_entities: struct (nullable = true)\n |    |    |    |    |-- media: array (nullable = true)\n |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |-- display_url: string (nullable = true)\n |    |    |    |    |    |    |-- expanded_url: string (nullable = true)\n |    |    |    |    |    |    |-- id: long (nullable = true)\n |    |    |    |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |    |    |    |-- indices: array (nullable = true)\n |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |-- media_url: string (nullable = true)\n |    |    |    |    |    |    |-- media_url_https: string (nullable = true)\n |    |    |    |    |    |    |-- sizes: struct (nullable = true)\n |    |    |    |    |    |    |    |-- large: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |    |-- medium: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |    |-- small: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |    |-- thumb: struct (nullable = true)\n |    |    |    |    |    |    |    |    |-- h: long (nullable = true)\n |    |    |    |    |    |    |    |    |-- resize: string (nullable = true)\n |    |    |    |    |    |    |    |    |-- w: long (nullable = true)\n |    |    |    |    |    |    |-- source_status_id: long (nullable = true)\n |    |    |    |    |    |    |-- source_status_id_str: string (nullable = true)\n |    |    |    |    |    |    |-- source_user_id: long (nullable = true)\n |    |    |    |    |    |    |-- source_user_id_str: string (nullable = true)\n |    |    |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |    |    |    |-- video_info: struct (nullable = true)\n |    |    |    |    |    |    |    |-- aspect_ratio: array (nullable = true)\n |    |    |    |    |    |    |    |    |-- element: long (containsNull = true)\n |    |    |    |    |    |    |    |-- duration_millis: long (nullable = true)\n |    |    |    |    |    |    |    |-- variants: array (nullable = true)\n |    |    |    |    |    |    |    |    |-- element: struct (containsNull = true)\n |    |    |    |    |    |    |    |    |    |-- bitrate: long (nullable = true)\n |    |    |    |    |    |    |    |    |    |-- content_type: string (nullable = true)\n |    |    |    |    |    |    |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- full_text: string (nullable = true)\n |    |    |-- favorite_count: long (nullable = true)\n |    |    |-- favorited: boolean (nullable = true)\n |    |    |-- filter_level: string (nullable = true)\n |    |    |-- geo: struct (nullable = true)\n |    |    |    |-- coordinates: array (nullable = true)\n |    |    |    |    |-- element: double (containsNull = true)\n |    |    |    |-- type: string (nullable = true)\n |    |    |-- id: long (nullable = true)\n |    |    |-- id_str: string (nullable = true)\n |    |    |-- in_reply_to_screen_name: string (nullable = true)\n |    |    |-- in_reply_to_status_id: long (nullable = true)\n |    |    |-- in_reply_to_status_id_str: string (nullable = true)\n |    |    |-- in_reply_to_user_id: long (nullable = true)\n |    |    |-- in_reply_to_user_id_str: string (nullable = true)\n |    |    |-- is_quote_status: boolean (nullable = true)\n |    |    |-- lang: string (nullable = true)\n |    |    |-- place: struct (nullable = true)\n |    |    |    |-- bounding_box: struct (nullable = true)\n |    |    |    |    |-- coordinates: array (nullable = true)\n |    |    |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |    |    |-- element: array (containsNull = true)\n |    |    |    |    |    |    |    |-- element: double (containsNull = true)\n |    |    |    |    |-- type: string (nullable = true)\n |    |    |    |-- country: string (nullable = true)\n |    |    |    |-- country_code: string (nullable = true)\n |    |    |    |-- full_name: string (nullable = true)\n |    |    |    |-- id: string (nullable = true)\n |    |    |    |-- name: string (nullable = true)\n |    |    |    |-- place_type: string (nullable = true)\n |    |    |    |-- url: string (nullable = true)\n |    |    |-- possibly_sensitive: boolean (nullable = true)\n |    |    |-- quoted_status_id: long (nullable = true)\n |    |    |-- quoted_status_id_str: string (nullable = true)\n |    |    |-- retweet_count: long (nullable = true)\n |    |    |-- retweeted: boolean (nullable = true)\n |    |    |-- scopes: struct (nullable = true)\n |    |    |    |-- followers: boolean (nullable = true)\n |    |    |    |-- place_ids: array (nullable = true)\n |    |    |    |    |-- element: string (containsNull = true)\n |    |    |-- source: string (nullable = true)\n |    |    |-- text: string (nullable = true)\n |    |    |-- truncated: boolean (nullable = true)\n |    |    |-- user: struct (nullable = true)\n |    |    |    |-- contributors_enabled: boolean (nullable = true)\n |    |    |    |-- created_at: string (nullable = true)\n |    |    |    |-- default_profile: boolean (nullable = true)\n |    |    |    |-- default_profile_image: boolean (nullable = true)\n |    |    |    |-- description: string (nullable = true)\n |    |    |    |-- favourites_count: long (nullable = true)\n |    |    |    |-- follow_request_sent: string (nullable = true)\n |    |    |    |-- followers_count: long (nullable = true)\n |    |    |    |-- following: string (nullable = true)\n |    |    |    |-- friends_count: long (nullable = true)\n |    |    |    |-- geo_enabled: boolean (nullable = true)\n |    |    |    |-- id: long (nullable = true)\n |    |    |    |-- id_str: string (nullable = true)\n |    |    |    |-- is_translator: boolean (nullable = true)\n |    |    |    |-- lang: string (nullable = true)\n |    |    |    |-- listed_count: long (nullable = true)\n |    |    |    |-- location: string (nullable = true)\n |    |    |    |-- name: string (nullable = true)\n |    |    |    |-- notifications: string (nullable = true)\n |    |    |    |-- profile_background_color: string (nullable = true)\n |    |    |    |-- profile_background_image_url: string (nullable = true)\n |    |    |    |-- profile_background_image_url_https: string (nullable = true)\n |    |    |    |-- profile_background_tile: boolean (nullable = true)\n |    |    |    |-- profile_banner_url: string (nullable = true)\n |    |    |    |-- profile_image_url: string (nullable = true)\n |    |    |    |-- profile_image_url_https: string (nullable = true)\n |    |    |    |-- profile_link_color: string (nullable = true)\n |    |    |    |-- profile_sidebar_border_color: string (nullable = true)\n |    |    |    |-- profile_sidebar_fill_color: string (nullable = true)\n |    |    |    |-- profile_text_color: string (nullable = true)\n |    |    |    |-- profile_use_background_image: boolean (nullable = true)\n |    |    |    |-- protected: boolean (nullable = true)\n |    |    |    |-- screen_name: string (nullable = true)\n |    |    |    |-- statuses_count: long (nullable = true)\n |    |    |    |-- time_zone: string (nullable = true)\n |    |    |    |-- url: string (nullable = true)\n |    |    |    |-- utc_offset: long (nullable = true)\n |    |    |    |-- verified: boolean (nullable = true)\n |    |    |-- withheld_copyright: boolean (nullable = true)\n |    |    |-- withheld_in_countries: array (nullable = true)\n |    |    |    |-- element: string (containsNull = true)\n |    |-- quoted_status_id: long (nullable = true)\n |    |-- quoted_status_id_str: string (nullable = true)\n |    |-- retweet_count: long (nullable = true)\n |    |-- retweeted: boolean (nullable = true)\n |    |-- scopes: struct (nullable = true)\n |    |    |-- followers: boolean (nullable = true)\n |    |    |-- place_ids: array (nullable = true)\n |    |    |    |-- element: string (containsNull = true)\n |    |-- source: string (nullable = true)\n |    |-- text: string (nullable = true)\n |    |-- truncated: boolean (nullable = true)\n |    |-- user: struct (nullable = true)\n |    |    |-- contributors_enabled: boolean (nullable = true)\n |    |    |-- created_at: string (nullable = true)\n |    |    |-- default_profile: boolean (nullable = true)\n |    |    |-- default_profile_image: boolean (nullable = true)\n |    |    |-- description: string (nullable = true)\n |    |    |-- favourites_count: long (nullable = true)\n |    |    |-- follow_request_sent: string (nullable = true)\n |    |    |-- followers_count: long (nullable = true)\n |    |    |-- following: string (nullable = true)\n |    |    |-- friends_count: long (nullable = true)\n |    |    |-- geo_enabled: boolean (nullable = true)\n |    |    |-- id: long (nullable = true)\n |    |    |-- id_str: string (nullable = true)\n |    |    |-- is_translation_enabled: boolean (nullable = true)\n |    |    |-- is_translator: boolean (nullable = true)\n |    |    |-- lang: string (nullable = true)\n |    |    |-- listed_count: long (nullable = true)\n |    |    |-- location: string (nullable = true)\n |    |    |-- name: string (nullable = true)\n |    |    |-- notifications: string (nullable = true)\n |    |    |-- profile_background_color: string (nullable = true)\n |    |    |-- profile_background_image_url: string (nullable = true)\n |    |    |-- profile_background_image_url_https: string (nullable = true)\n |    |    |-- profile_background_tile: boolean (nullable = true)\n |    |    |-- profile_banner_url: string (nullable = true)\n |    |    |-- profile_image_url: string (nullable = true)\n |    |    |-- profile_image_url_https: string (nullable = true)\n |    |    |-- profile_link_color: string (nullable = true)\n |    |    |-- profile_sidebar_border_color: string (nullable = true)\n |    |    |-- profile_sidebar_fill_color: string (nullable = true)\n |    |    |-- profile_text_color: string (nullable = true)\n |    |    |-- profile_use_background_image: boolean (nullable = true)\n |    |    |-- protected: boolean (nullable = true)\n |    |    |-- screen_name: string (nullable = true)\n |    |    |-- statuses_count: long (nullable = true)\n |    |    |-- time_zone: string (nullable = true)\n |    |    |-- url: string (nullable = true)\n |    |    |-- utc_offset: long (nullable = true)\n |    |    |-- verified: boolean (nullable = true)\n |    |-- withheld_copyright: boolean (nullable = true)\n |    |-- withheld_in_countries: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |-- scopes: struct (nullable = true)\n |    |-- place_ids: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |-- source: string (nullable = true)\n |-- status_withheld: struct (nullable = true)\n |    |-- id: long (nullable = true)\n |    |-- timestamp_ms: string (nullable = true)\n |    |-- user_id: long (nullable = true)\n |    |-- withheld_in_countries: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |-- text: string (nullable = true)\n |-- timestamp_ms: string (nullable = true)\n |-- truncated: boolean (nullable = true)\n |-- user: struct (nullable = true)\n |    |-- contributors_enabled: boolean (nullable = true)\n |    |-- created_at: string (nullable = true)\n |    |-- default_profile: boolean (nullable = true)\n |    |-- default_profile_image: boolean (nullable = true)\n |    |-- description: string (nullable = true)\n |    |-- favourites_count: long (nullable = true)\n |    |-- follow_request_sent: string (nullable = true)\n |    |-- followers_count: long (nullable = true)\n |    |-- following: string (nullable = true)\n |    |-- friends_count: long (nullable = true)\n |    |-- geo_enabled: boolean (nullable = true)\n |    |-- id: long (nullable = true)\n |    |-- id_str: string (nullable = true)\n |    |-- is_translation_enabled: boolean (nullable = true)\n |    |-- is_translator: boolean (nullable = true)\n |    |-- lang: string (nullable = true)\n |    |-- listed_count: long (nullable = true)\n |    |-- location: string (nullable = true)\n |    |-- name: string (nullable = true)\n |    |-- notifications: string (nullable = true)\n |    |-- profile_background_color: string (nullable = true)\n |    |-- profile_background_image_url: string (nullable = true)\n |    |-- profile_background_image_url_https: string (nullable = true)\n |    |-- profile_background_tile: boolean (nullable = true)\n |    |-- profile_banner_url: string (nullable = true)\n |    |-- profile_image_url: string (nullable = true)\n |    |-- profile_image_url_https: string (nullable = true)\n |    |-- profile_link_color: string (nullable = true)\n |    |-- profile_sidebar_border_color: string (nullable = true)\n |    |-- profile_sidebar_fill_color: string (nullable = true)\n |    |-- profile_text_color: string (nullable = true)\n |    |-- profile_use_background_image: boolean (nullable = true)\n |    |-- protected: boolean (nullable = true)\n |    |-- screen_name: string (nullable = true)\n |    |-- statuses_count: long (nullable = true)\n |    |-- time_zone: string (nullable = true)\n |    |-- url: string (nullable = true)\n |    |-- utc_offset: long (nullable = true)\n |    |-- verified: boolean (nullable = true)\n |-- withheld_copyright: boolean (nullable = true)\n |-- withheld_in_countries: array (nullable = true)\n |    |-- element: string (containsNull = true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647747890506_2047012494",
+      "id": "paragraph_1647747890506_2047012494",
+      "dateCreated": "2022-03-20T03:44:50+0000",
+      "dateStarted": "2022-03-21T00:33:23+0000",
+      "dateFinished": "2022-03-21T00:33:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8290"
+    },
+    {
+      "title": "filter (id, id_str), (user.id, user.id_str), entities.hashtags, text, created_at, lang",
+      "text": "val df2 = df.filter(df(\"id\").isNotNull || df(\"id_str\").isNotNull)\nval df3 = df2.filter($\"user.id\".isNotNull ||$\"user.id_str\".isNotNull )\nval df4 = df3.filter(size($\"entities.hashtags\") =!= 0 && $\"entities.hashtags\".isNotNull)\nval df5 = df4.filter(length($\"text\") =!= 0 && $\"text\".isNotNull)\nval df6 = df5.filter($\"created_at\".isNotNull)\nval df7 = df6.filter($\"lang\".isin(langList:_*))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-21T00:33:27+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 36 more fields]\n\u001b[1m\u001b[34mdf3\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 36 more fields]\n\u001b[1m\u001b[34mdf4\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 36 more fields]\n\u001b[1m\u001b[34mdf5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 36 more fields]\n\u001b[1m\u001b[34mdf6\u001b[0m: \u001b[1m\u001b[3...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718068649_1705776750",
+      "id": "paragraph_1647718068649_1705776750",
+      "dateCreated": "2022-03-19T19:27:48+0000",
+      "dateStarted": "2022-03-21T00:33:27+0000",
+      "dateFinished": "2022-03-21T00:33:28+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8291"
+    },
+    {
+      "text": "df8.count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T21:34:52+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres85\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 39092\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=143",
+              "$$hashKey": "object:9430"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=144",
+              "$$hashKey": "object:9431"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647806072796_1009480896",
+      "id": "paragraph_1647806072796_1009480896",
+      "dateCreated": "2022-03-20T19:54:32+0000",
+      "dateStarted": "2022-03-20T21:34:52+0000",
+      "dateFinished": "2022-03-20T21:35:09+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8292"
+    },
+    {
+      "title": "add tweet type, is_retweet, is_reply",
+      "text": "val df8 = df7.withColumn(\n\"is_reply\",\n  when(col(\"in_reply_to_user_id_str\").isNotNull,true)\n    .otherwise(false)\n).withColumn(\n  \"is_retweet\",\n  when(col(\"retweeted_status\").isNotNull,true)\n    .otherwise(false)\n)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-21T00:33:31+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf8\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 38 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718119924_883818947",
+      "id": "paragraph_1647718119924_883818947",
+      "dateCreated": "2022-03-19T19:28:39+0000",
+      "dateStarted": "2022-03-21T00:33:31+0000",
+      "dateFinished": "2022-03-21T00:33:32+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8293"
+    },
+    {
+      "title": "complete (id, id_str) (user.id, user.id_str) with each other",
+      "text": "val df9 = df8.withColumn(\"id\", when(col(\"id_str\").isNotNull, col(\"id_str\").cast(LongType)).otherwise(col(\"id\")))\n  .withColumn(\"id_str\", when(col(\"id\").isNotNull, col(\"id\").cast(StringType)).otherwise(col(\"id_str\")))\n  .withColumn(\"user_id\", when(col(\"user.id_str\").isNotNull, col(\"user.id_str\").cast(LongType)).otherwise(col(\"user.id\")))\n  .withColumn(\"user_id_str\", when(col(\"user.id\").isNotNull, col(\"user.id\").cast(StringType)).otherwise(col(\"user.id_str\")))\n  \nval df10 = df9.dropDuplicates(\"id_str\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-21T00:33:33+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf9\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 40 more fields]\n\u001b[1m\u001b[34mdf10\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 40 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718134217_41205982",
+      "id": "paragraph_1647718134217_41205982",
+      "dateCreated": "2022-03-19T19:28:54+0000",
+      "dateStarted": "2022-03-21T00:33:33+0000",
+      "dateFinished": "2022-03-21T00:33:35+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8294"
+    },
+    {
+      "text": "df10.count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T19:54:00+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres76\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 39092\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=127",
+              "$$hashKey": "object:9597"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=128",
+              "$$hashKey": "object:9598"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=129",
+              "$$hashKey": "object:9599"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647806037739_1028159188",
+      "id": "paragraph_1647806037739_1028159188",
+      "dateCreated": "2022-03-20T19:53:57+0000",
+      "dateStarted": "2022-03-20T19:54:00+0000",
+      "dateFinished": "2022-03-20T19:54:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8295"
+    },
+    {
+      "title": "(without _str fields) explode hashtags and select needed columns",
+      "text": "val dfUnique = df10.select($\"id\",$\"text\",$\"is_reply\",$\"is_retweet\",$\"user_id\", $\"user.description\".as(\"user_description\"),$\"user.screen_name\".as(\"user_screen_name\"),$\"in_reply_to_user_id\", $\"retweeted_status.user.id\".as(\"retweeted_status_user_id\"),$\"created_at\")\ndfUnique.createOrReplaceTempView(\"tweetUnique\")\nval df11 = df10.withColumn(\"hashtag_text\", explode($\"entities.hashtags.text\"))\nval df12 = df11.select($\"id\",$\"text\",$\"is_reply\",$\"is_retweet\",$\"user_id\",$\"user.description\".as(\"user_description\"),$\"user.screen_name\".as(\"user_screen_name\"),$\"in_reply_to_user_id\",$\"retweeted_status.user.id\".as(\"retweeted_status_user_id\"),$\"created_at\",$\"hashtag_text\")\ndf12.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T23:59:15+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- id: long (nullable = true)\n |-- text: string (nullable = true)\n |-- is_reply: boolean (nullable = false)\n |-- is_retweet: boolean (nullable = false)\n |-- user_id: long (nullable = true)\n |-- user_description: string (nullable = true)\n |-- user_screen_name: string (nullable = true)\n |-- in_reply_to_user_id: long (nullable = true)\n |-- retweeted_status_user_id: long (nullable = true)\n |-- created_at: string (nullable = true)\n |-- hashtag_text: string (nullable = true)\n\n\u001b[1m\u001b[34mdfUnique\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: bigint, text: string ... 8 more fields]\n\u001b[1m\u001b[34mdf11\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [contributors: string, coordinates: struct<coordinates: array<double>, type: string> ... 41 more fields]\n\u001b[1m\u001b[34mdf12\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: bigint, text: string ... 9 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718137317_1658827243",
+      "id": "paragraph_1647718137317_1658827243",
+      "dateCreated": "2022-03-19T19:28:57+0000",
+      "dateStarted": "2022-03-21T00:33:37+0000",
+      "dateFinished": "2022-03-21T00:33:38+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8296"
+    },
+    {
+      "title": "don't run, list, comparison",
+      "text": "dfUnique.createOrReplaceTempView(\"tweetUnique\")\nval df13 = df12.groupBy(\"id\").agg(collect_list(\"hashtag_text\").as(\"hashtag_list\"))\ndf13.createOrReplaceTempView(\"hashtag\")\n\nval df14 = spark.sql(\"SELECT * FROM tweetUnique t JOIN hashtag h ON t.id=h.id\").drop(col(\"h.id\"))\ndf14.printSchema()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:12:47+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- id: long (nullable = true)\n |-- text: string (nullable = true)\n |-- is_reply: boolean (nullable = false)\n |-- is_retweet: boolean (nullable = false)\n |-- user_id: long (nullable = true)\n |-- user_description: string (nullable = true)\n |-- user_screen_name: string (nullable = true)\n |-- in_reply_to_user_id: long (nullable = true)\n |-- retweeted_status_user_id: long (nullable = true)\n |-- created_at: string (nullable = true)\n |-- hashtag_list: array (nullable = false)\n |    |-- element: string (containsNull = false)\n\n\u001b[1m\u001b[34mdf13\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: bigint, hashtag_list: array<string>]\n\u001b[1m\u001b[34mdf14\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: bigint, text: string ... 9 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718631825_493627226",
+      "id": "paragraph_1647718631825_493627226",
+      "dateCreated": "2022-03-19T19:37:11+0000",
+      "dateStarted": "2022-03-20T21:52:40+0000",
+      "dateFinished": "2022-03-20T21:52:40+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8297"
+    },
+    {
+      "text": "dfUnique.createOrReplaceTempView(\"tweetUnique\")\nval df13 = df12.groupBy($\"id\").agg(concat_ws(\"\\u001F\", collect_list($\"hashtag_text\")).as(\"hashtags\"))\ndf13.createOrReplaceTempView(\"hashtag\")\nval df14 = spark.sql(\"SELECT * FROM tweetUnique t JOIN hashtag h ON t.id=h.id\").drop(col(\"h.id\"))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-21T00:36:37+0000",
+      "progress": 50,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf13\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: bigint, hashtags: string]\n\u001b[1m\u001b[34mdf14\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: bigint, text: string ... 9 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718181835_827489388",
+      "id": "paragraph_1647718181835_827489388",
+      "dateCreated": "2022-03-19T19:29:41+0000",
+      "dateStarted": "2022-03-21T00:36:37+0000",
+      "dateFinished": "2022-03-21T00:36:37+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8298"
+    },
+    {
+      "text": "df14.write.option(\"header\",true).option(\"compression\",\"gzip\").csv(\"gs://public-store-bucket/reference_csv_compressed\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-21T00:38:52+0000",
+      "progress": 75,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=6",
+              "$$hashKey": "object:9811"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=7",
+              "$$hashKey": "object:9812"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=8",
+              "$$hashKey": "object:9813"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=10",
+              "$$hashKey": "object:9814"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718383315_15566560",
+      "id": "paragraph_1647718383315_15566560",
+      "dateCreated": "2022-03-19T19:33:03+0000",
+      "dateStarted": "2022-03-19T23:05:28+0000",
+      "dateFinished": "2022-03-19T23:05:57+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8299"
+    },
+    {
+      "text": "import java.util.Properties\nimport java.sql.DriverManager\n\n// set credentials\nval jdbcPort = \"3306\"\nval jdbcDatabase = \"twitter_db\"\nval jdbcUsername = \"root\"\nval jdbcPassword = \"CHANGE_ME\"   // the password you set\n// val jdbcHostname = \"a4c029f1e58ca489d9fcb2a370532e39-1904823454.us-east-1.elb.amazonaws.com\"   // the external IP address of you MySQL DB\nval jdbcHostname = \"a85e1f47f2963440fa7a4b7b6d0bd19f-544985636.us-east-1.elb.amazonaws.com\"\n\nval jdbcUrl =s\"jdbc:mysql://$jdbcHostname:$jdbcPort/$jdbcDatabase\"\n\nval driverClass = \"com.mysql.jdbc.Driver\"\nClass.forName(driverClass)  // check jdbc driver\n\n// set connection properties\nval connectionProperties = new Properties()\nconnectionProperties.put(\"user\", s\"$jdbcUsername\")\nconnectionProperties.put(\"password\", s\"$jdbcPassword\")\nconnectionProperties.setProperty(\"Driver\", driverClass)\nconnectionProperties.setProperty(\"useServerPrepStmts\", \"false\")    // take note of this configuration, and understand what it does\nconnectionProperties.setProperty(\"rewriteBatchedStatements\", \"true\")  // take note of this configuration, and understand what it does\n\n// first drop the table if it already exists\nval connection = DriverManager.getConnection(jdbcUrl, jdbcUsername, jdbcPassword)\nassert(!connection.isClosed)\nval stmt = connection.createStatement()\nval tableName = \"tweets\"\nstmt.executeUpdate(\"drop table if exists $tableName\")\n\n// write the dataframe to a table called \"biz_review\"\ndf14.write.jdbc(jdbcUrl, s\"$tableName\", connectionProperties)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-21T00:50:05+0000",
+      "progress": 7,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import java.util.Properties\nimport java.sql.DriverManager\n\u001b[1m\u001b[34mjdbcPort\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = 3306\n\u001b[1m\u001b[34mjdbcDatabase\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = twitter_db\n\u001b[1m\u001b[34mjdbcUsername\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = root\n\u001b[1m\u001b[34mjdbcPassword\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = CHANGE_ME\n\u001b[1m\u001b[34mjdbcHostname\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = a85e1f47f2963440fa7a4b7b6d0bd19f-544985636.us-east-1.elb.amazonaws.com\n\u001b[1m\u001b[34mjdbcUrl\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = jdbc:mysql://a85e1f47f2963440fa7a4b7b6d0bd19f-544985636.us-east-1.elb.amazonaws.com:3306/twitter_db\n\u001b[1m\u001b[34mdriverClass\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = com.mysql.jdbc.Driver\n\u001b[1m\u001b[34mconnectionProperties\u001b[0m: \u001b[1m\u001b[32mjava.util.Properties\u001b[0m = {user=root, password=CHANGE_ME, Driver=com.mysql.jdbc.Driver, rewriteBatchedStatements=true, useServerPre...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=193",
+              "$$hashKey": "object:9884"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=194",
+              "$$hashKey": "object:9885"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=195",
+              "$$hashKey": "object:9886"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=196",
+              "$$hashKey": "object:9887"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40823/jobs/job?id=197",
+              "$$hashKey": "object:9888"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647718972140_1874121408",
+      "id": "paragraph_1647718972140_1874121408",
+      "dateCreated": "2022-03-19T19:42:52+0000",
+      "dateStarted": "2022-03-21T00:50:06+0000",
+      "dateFinished": "2022-03-21T03:51:45+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8300"
+    },
+    {
+      "title": "hashtag table",
+      "text": "import org.apache.spark.sql.functions.lower\nimport java.util.Properties\nimport java.sql.DriverManager\n\n\n// val df = spark.read.option(\"header\", \"true\").json(\"gs://public-store-bucket/BigDatasetOutputJson/part-00000-f1773fe3-5e4d-4ff2-a2eb-7ccd3dc94304-c000.json\")\nval df = spark.read.option(\"header\", \"true\").json(\"gs://public-store-bucket/BigDatasetOutputJson_DoubleCheck\")\nval df2 = df.withColumn(\"single_hashtag\",explode($\"hashtag_list\"))\nval popular_list =  spark.read.text(\"gs://m3demo/popular_hashtags.txt\").withColumn(\"hashtag\", lower(col(\"value\")))\nval popular_list_seq = popular_list.select(\"hashtag\").map(_.getString(0)).collect.toSeq \nval df3 = df2.filter(!$\"single_hashtag\".isin(popular_list_seq: _*))\n// val df4 = df3.groupBy(\"user_id\").agg((concat_ws(\"\\u001f\", collect_list(\"single_hashtag\")).alias(\"all_hashtags\")))\nval df4 = df3.groupBy(\"user_id\").agg(collect_list(\"single_hashtag\").alias(\"all_hashtags\"))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-23T00:01:07+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.zeppelin.interpreter.InterpreterException: org.apache.zeppelin.interpreter.InterpreterException: Fail to open SparkInterpreter\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.open(LazyOpenInterpreter.java:76)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:833)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:741)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler.lambda$runJobInScheduler$0(FIFOScheduler.java:42)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:750)\nCaused by: org.apache.zeppelin.interpreter.InterpreterException: Fail to open SparkInterpreter\n\tat org.apache.zeppelin.spark.SparkInterpreter.open(SparkInterpreter.java:137)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.open(LazyOpenInterpreter.java:70)\n\t... 8 more\nCaused by: java.lang.reflect.InvocationTargetException\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.BaseSparkScalaInterpreter.spark2CreateContext(BaseSparkScalaInterpreter.scala:290)\n\tat org.apache.zeppelin.spark.BaseSparkScalaInterpreter.createSparkContext(BaseSparkScalaInterpreter.scala:228)\n\tat org.apache.zeppelin.spark.SparkScala212Interpreter.open(SparkScala212Interpreter.scala:88)\n\tat org.apache.zeppelin.spark.SparkInterpreter.open(SparkInterpreter.java:121)\n\t... 9 more\nCaused by: java.lang.IllegalArgumentException: Required executor memory (32768 MB), offHeap memory (0) MB, overhead (3276 MB), and PySpark memory (0 MB) is above the max threshold (12624 MB) of this cluster! Please check the values of 'yarn.scheduler.maximum-allocation-mb' and/or 'yarn.nodemanager.resource.memory-mb'.\n\tat org.apache.spark.deploy.yarn.Client.verifyClusterResources(Client.scala:368)\n\tat org.apache.spark.deploy.yarn.Client.submitApplication(Client.scala:199)\n\tat org.apache.spark.scheduler.cluster.YarnClientSchedulerBackend.start(YarnClientSchedulerBackend.scala:62)\n\tat org.apache.spark.scheduler.TaskSchedulerImpl.start(TaskSchedulerImpl.scala:220)\n\tat org.apache.spark.SparkContext.<init>(SparkContext.scala:579)\n\tat org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2680)\n\tat org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:945)\n\tat scala.Option.getOrElse(Option.scala:189)\n\tat org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:939)\n\t... 17 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647812716300_1599991919",
+      "id": "paragraph_1647812716300_1599991919",
+      "dateCreated": "2022-03-20T21:45:16+0000",
+      "dateStarted": "2022-03-23T00:01:08+0000",
+      "dateFinished": "2022-03-23T00:01:21+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:8301"
+    },
+    {
+      "text": "val df5 = df4.select(col(\"user_id\") as \"user_id_a\", col(\"all_hashtags\") as \"all_hashtags_a\")\n   .join(df4.select(col(\"user_id\") as \"user_id_b\", col(\"all_hashtags\") as \"all_hashtags_b\"))\n// df5.show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T21:18:19+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 478,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_id_a: bigint, all_hashtags_a: array<string> ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647908092605_397410289",
+      "id": "paragraph_1647908092605_397410289",
+      "dateCreated": "2022-03-22T00:14:52+0000",
+      "dateStarted": "2022-03-22T21:18:19+0000",
+      "dateFinished": "2022-03-22T21:18:20+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8302"
+    },
+    {
+      "text": "import java.util.Locale\n\nobject countCommonTags {\n  def count(left:Array[String], right:Array[String]) : Int = {\n    var l: String = \"a\";\n    val lower_left = left.map(x=>x.toLowerCase(Locale.ENGLISH))\n    val lower_right = right.map(x=>x.toLowerCase(Locale.ENGLISH))\n    \n    val intersection_list = lower_left.toSet.intersect(lower_right.toSet) // [a,a,b] [b,b] = [b]\n    // val intersection_list = left.toSet.intersect(right.toSet)\n    \n    val left_counter = lower_left.groupBy(identity).mapValues(_.size) // {a:2, b:1}\n    val right_counter = lower_right.groupBy(identity).mapValues(_.size)  // {b:2}\n    // val left_counter = left.groupBy(identity).mapValues(_.size) // {a:2, b:1}\n    // val right_counter = right.groupBy(identity).mapValues(_.size)  // {b:2}\n    var total_sum:Int = 0;\n    for( common <- intersection_list ){ // b\n         total_sum += left_counter(common) + right_counter(common)\n      }\n     total_sum\n    // intersection_list.size\n}\n}\n\nval tagUDF = udf((left:Array[String], right:Array[String]) => countCommonTags.count(left, right))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T21:18:22+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import java.util.Locale\ndefined object countCommonTags\n\u001b[1m\u001b[34mtagUDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.UserDefinedFunction\u001b[0m = SparkUserDefinedFunction($Lambda$4377/999495617@2eb5df7c,IntegerType,List(Some(class[value[0]: array<string>]), Some(class[value[0]: array<string>])),Some(class[value[0]: int]),None,false,true)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647909844055_1243775796",
+      "id": "paragraph_1647909844055_1243775796",
+      "dateCreated": "2022-03-22T00:44:04+0000",
+      "dateStarted": "2022-03-22T21:18:22+0000",
+      "dateFinished": "2022-03-22T21:18:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8303"
+    },
+    {
+      "text": "val df6 = df5.withColumn(\"commonTags\", tagUDF($\"all_hashtags_a\",$\"all_hashtags_b\"))\n\nval df7 = df6.filter($\"commonTags\">10 && $\"user_id_a\"=!=$\"user_id_b\").withColumn(\"hashtag_score\", lit(1)+log($\"commonTags\"-lit(9)))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T21:18:48+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf6\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_id_a: bigint, all_hashtags_a: array<string> ... 3 more fields]\n\u001b[1m\u001b[34mdf7\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_id_a: bigint, all_hashtags_a: array<string> ... 4 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647917034642_340807363",
+      "id": "paragraph_1647917034642_340807363",
+      "dateCreated": "2022-03-22T02:43:54+0000",
+      "dateStarted": "2022-03-22T21:18:48+0000",
+      "dateFinished": "2022-03-22T21:18:48+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8304"
+    },
+    {
+      "text": "df7.filter($\"user_id_a\"===7502142).show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T14:18:06+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.spark.SparkException: Job 24 cancelled part of cancelled job group zeppelin|anonymous|2GZWKMHSC|paragraph_1647923638145_583536804\n  at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2259)\n  at org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:2155)\n  at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleJobGroupCancelled$4(DAGScheduler.scala:1048)\n  at scala.runtime.java8.JFunction1$mcVI$sp.apply(JFunction1$mcVI$sp.java:23)\n  at scala.collection.mutable.HashSet.foreach(HashSet.scala:79)\n  at org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:1047)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2408)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2388)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2377)\n  at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:39153/jobs/job?id=24",
+              "$$hashKey": "object:10170"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647923638145_583536804",
+      "id": "paragraph_1647923638145_583536804",
+      "dateCreated": "2022-03-22T04:33:58+0000",
+      "dateStarted": "2022-03-22T14:18:06+0000",
+      "dateFinished": "2022-03-22T14:18:11+0000",
+      "status": "ABORT",
+      "$$hashKey": "object:8305"
+    },
+    {
+      "text": "val df8 = df7.select($\"user_id_a\",$\"user_id_b\",$\"commonTags\",$\"hashtag_score\")\n// df8.filter($\"user_id_a\"===7502142).show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T21:19:09+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf8\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_id_a: bigint, user_id_b: bigint ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647947677553_1008098490",
+      "id": "paragraph_1647947677553_1008098490",
+      "dateCreated": "2022-03-22T11:14:37+0000",
+      "dateStarted": "2022-03-22T21:19:09+0000",
+      "dateFinished": "2022-03-22T21:19:09+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8306"
+    },
+    {
+      "text": "df8.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T11:15:45+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- user_id_a: long (nullable = true)\n |-- user_id_b: long (nullable = true)\n |-- commonTags: integer (nullable = false)\n |-- hashtag_score: double (nullable = true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647947741674_1659699074",
+      "id": "paragraph_1647947741674_1659699074",
+      "dateCreated": "2022-03-22T11:15:41+0000",
+      "dateStarted": "2022-03-22T11:15:45+0000",
+      "dateFinished": "2022-03-22T11:15:46+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8307"
+    },
+    {
+      "title": "drawing histgram",
+      "text": "val df_his_1 = df2.groupBy(\"single_hashtag\").count()\nval df_his_2 = df_his_1.withColumn(\"log_count\", log10($\"count\")).select(\"single_hashtag\",\"log_count\")\ndf_his_2.printSchema()\n\ndf_his_2.createOrReplaceTempView(\"df_his_2\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T17:55:31+0000",
+      "progress": 2,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- single_hashtag: string (nullable = true)\n |-- log_count: double (nullable = true)\n\n\u001b[1m\u001b[34mdf_his_1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [single_hashtag: string, count: bigint]\n\u001b[1m\u001b[34mdf_his_2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [single_hashtag: string, log_count: double]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647949862836_1024604509",
+      "id": "paragraph_1647949862836_1024604509",
+      "dateCreated": "2022-03-22T11:51:02+0000",
+      "dateStarted": "2022-03-22T13:27:49+0000",
+      "dateFinished": "2022-03-22T13:27:49+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8308"
+    },
+    {
+      "text": "%sql select * from df_his_2 ORDER BY log_count ;",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T17:55:22+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "sql"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "scatterChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "single_hashtag": "string",
+                      "log_count": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "single_hashtag",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "log_count",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "single_hashtag\tlog_count\nLT\t3.9211139738366807\npoetry\t3.4781334281005174\nSamvadOnAgri\t0.3010299956639812\nbookmeter\t3.6960941599952233\nWorldOfRock\t0.0\nVirgo\t4.4094935368675765\nTACHIRA\t3.0453229787866576\njewelry\t4.037585842826617\nGoth\t1.9344984512435677\nokkerry\t0.0\nSpiderMan\t3.1809855807867304\ntravel\t4.4777866629092395\n私の声が高いイメージの人はrt低いイメージの人はふぁぼ\t1.7558748556724915\nFAV\t3.87742894078822\nonline\t3.8064513232472623\nDomingoConDDe\t1.146128035678238\nanime\t3.830203598925704\n今なら5円なしでフォローします\t1.146128035678238\nart\t4.48750602621804\n高槻やよい生誕祭\t2.290034611362518\nSedatDaşÖmerDönmezHizlicaTTyapar\t3.219322508419337\nチュニック\t2.660865478003869\nTaylorIsTheBestIdolInTheWorld\t1.414973347970818\nالاختبارات\t3.699230502883409\nces\t2.0863598306747484\n性的な意味でのあとに続けて予測変換の暴走\t2.7058637122839193\nhope\t3.5653755027140734\nKJWfacts\t0.0\nPlayBall\t1.716003343634799\nyokohama\t3.070037866607755\nUAB\t1.8260748027008264\noutfit\t3.089551882886454\nCasalFranGoNoMaisVoce\t2.285557309007774\nthelegalhour\t1.7481880270062005\nLawrenceTheRedBear\t0.3010299956639812\nKansiiiiime\t0.0\npools\t1.6020599913279625\nkuyabanda\t0.0\nTentangMasaSMP\t0.47712125471966244\nYasakçıRejimeHAYIR\t2.2355284469075487\nAmateur\t3.657342736814626\nrotatorcuff\t0.3010299956639812\nginsaji\t2.0170333392987803\nneonpig\t0.0\nASRoma\t2.637489729512511\npitinwork\t0.0\nニローニタイム\t3.059184617631371\ntmnt\t1.9542425094393248\nVastChat\t1.1139433523068367\nEBOOKDEAL\t1.2041199826559248\nwmc\t1.716003343634799\nAmazing\t3.279894980011638\nラブライバーと繋がりたい\t3.9941411111261225\nNBC\t2.9854264740830017\ndwc14\t0.0\nSHINEYOURLIGHT\t0.3010299956639812\nBenim_Oyum\t2.4927603890268375\nannkw\t2.5728716022004803\nSOUNEW\t1.3424226808222062\nフラガチャLYON\t2.1367205671564067\nmgs\t2.376576957056512\nGhettoChoirDirectorsBeLike\t0.0\nGijon\t1.9030899869919435\nplant14\t2.403120521175818\nLetsPlay\t2.45484486000851\nSPOILERALERT\t1.3222192947339193\nPimpOn\t0.3010299956639812\nelsa\t2.1398790864012365\nhimast\t1.6532125137753437\nRackCity04April\t1.3424226808222062\nmejordirectivocyl\t0.6020599913279624\n黒バスガチャ譲渡交換タグ\t0.8450980400142568\nCR4U\t3.1734776434529945\nNobitaKepoNeverDies\t2.361727836017593\nEｰGirls好きな人RT\t1.5797835966168101\nاالاخره\t1.505149978319906\nＦＯＬＬＯＷ\t3.8111056070179306\nAerosmithApril8\t1.3617278360175928\nWarcraft\t2.926342446625655\nclassiccarday\t1.2304489213782739\nعزيمه\t0.3010299956639812\nannboleyn\t0.0\n乙女ゲート\t1.3010299956639813\naintreeladiesday\t1.9684829485539352\n黒執事好きな人rt\t0.9030899869919435\nsemangat\t2.4712917110589387\nletdown\t1.8864907251724818\nالمسلمين\t3.1455071714096627\nembracethemane\t0.0\nGenY\t2.3710678622717363\ndoubts\t1.380211241711606\nGullsWLAX\t0.0\neseyosoi\t0.47712125471966244\nstrawberry\t2.6627578316815743\nアニキュー前日ハイキュークラスタ繋がろう\t1.8920946026904804\nBigPine\t0.0\ntürkiye\t2.8609366207000937\nbestrong\t1.9867717342662448\nبطل_تعال_الحين_كلمني\t0.47712125471966244\n韓国窃盗団\t0.0\nNigga\t1.845098040014257\nEntertainment_News\t1.2041199826559248\nMM\t2.8048206787211623\nGaryAllan\t1.6232492903979006\nWelcomeTaeyeonToThailand\t1.6901960800285136\nAmsterdamCup2014\t0.0\n嘘です\t1.9493900066449128\nSAOがリアルで発売されたら買ってやるひとRT\t1.7708520116421442\nAlcoholismo\t1.1139433523068367\nHappyOneYearCam\t0.47712125471966244\nbG\t2.717670503002262\nTakutAdaApaApa\t4.18859103659399\ntxla14\t1.7481880270062005\nvoyage\t2.788168371141168\nEaster\t3.657533887557986\nfootballprogrammes\t0.0\nお世辞でも似てると言ってくれる人RT\t2.8561244442423\nMelissaAnne\t1.5314789170422551\nAMDRadeon\t0.47712125471966244\nCNWelcomeFebruary\t2.5599066250361124\nMeSegueSDVComOHeyBrother\t2.4082399653118496\nBangalore\t2.9894498176666917\nFupqtqa\t0.0\nTFIOS\t3.515211304327802\n12ALaVnzlaQueQueremos\t1.7708520116421442\ncreativity\t3.1702617153949575\nValarMorghulis\t1.9777236052888478\nmtnfootball\t1.4913616938342726\nGlossy\t0.47712125471966244\nlicitaciones\t2.416640507338281\nthatwasconfusing\t1.255272505103306\nRifqiKorpriITclub\t1.5563025007672873\ngrwans\t0.0\nchien\t2.155336037465062\nGhanaJobs\t1.3010299956639813\nأنس_المنجد\t2.906335041805091\nAbrahamMateoEnHayUnaCosa\t1.6434526764861874\nnice1\t0.6989700043360189\nBeadingString\t0.8450980400142568\nHappyBirthdayTheCelebCulture\t1.0\neubankhappilyeverafter\t0.0\nPDIP\t2.173186268412274\nsmokefree\t1.7323937598229686\nSEXY808\t0.6989700043360189\nVMLM\t1.2041199826559248\nJamesTate\t0.0\npaypiggies\t1.041392685158225\nBeforeIDieIWantTo\t1.8195439355418688\nصوركم\t1.8573324964312685\nieirileo\t1.6020599913279625\nconcertinmycar\t0.0\npartyweekend\t0.6020599913279624\nPercayalah\t1.2787536009528289\nBenimAsılDerdim\t2.2405492482825995\nCHinko\t0.0\nconfissoesdamadrugada\t2.5599066250361124\nDistrict33\t0.3010299956639812\nnumbergirl\t0.6020599913279624\nTna\t0.6020599913279624\nツーリングに行きたくなる写真が集まるTL\t1.4313637641589874\nincoming\t1.2787536009528289\nVirgyDicipokFrieskaJKT48\t1.7708520116421442\nTengoHambre\t1.7481880270062005\nCelebesBrandClinic2014\t0.7781512503836436\n翼のイーリス\t2.4899584794248346\nWeLoveJackson\t0.7781512503836436\ncreepypasta\t2.060697840353612\nhala_madrid\t1.591064607026499\nhappyhappyhappybirthday\t0.47712125471966244\nAnnéescolaire20122013BestMemories\t0.3010299956639812\nDemiLovatoSTARCLUB\t1.9084850188786497\nkeepearthsafe\t0.9030899869919435\nUykusuzGitaristile23NisandaKazanıyoruz\t1.6020599913279625\nSaWattpad\t2.0086001717619175\nNiteFlirt\t2.979548374704095\nOGStatus\t0.0\npoppy\t2.380211241711606\nHF231_BU\t0.3010299956639812\nYOUSMELL\t0.0\nあめすぱ\t2.3263358609287517\nSaveOurNHS\t2.1818435879447726\nHaftaSonuDüşüncem\t2.1367205671564067\nWallpaperBolanet\t1.7853298350107671\nyjtv\t2.2671717284030137\n紹介\t2.462397997898956\nproudsister\t1.9030899869919435\nتوحد\t1.9493900066449128\nmelodic\t1.380211241711606\nwaters\t1.3979400086720377\nImagineRatings\t0.0\nلك_أنت\t1.863322860120456\nHolidays\t2.8020892578817325\nasiamanecíhoy\t0.0\nLibranosSeñor\t1.6020599913279625\nETSULogo\t0.0\nJJS\t1.6901960800285136\nTheCableNG\t1.2787536009528289\ncubs\t2.367355921026019\nstandards\t1.99563519459755\nRevolucionDeLosTrabajadores\t2.4578818967339924\nFuckIndiana\t0.0\nإستثنائية\t1.7558748556724915\nrainyday\t2.5327543789924976\nthose\t1.4913616938342726\nrecognize\t2.315970345456918\ntrail\t2.3180633349627615\nbuendia\t2.673941998634088\noflayn\t1.6989700043360187\nتواصل_معي\t1.146128035678238\nPalmganistan\t0.47712125471966244\niffy\t0.3010299956639812\nDrink\t2.290034611362518\nDarrenCriss\t1.568201724066995\nNcat\t1.1760912590556813\nクロスビーツ\t2.161368002234975\nvendo\t2.110589710299249\nadiosfreshmanyear\t0.0\nAskJayAnything\t0.0\nمساء\t2.964259630196849\nMhoniEnSabadazo\t3.0692980121155293\nRedDevils\t2.08278537031645\nINFORMATEX\t1.6020599913279625\nمسابقة_هذا_رسولنا\t2.1958996524092336\nNeighborsTour\t1.792391689498254\nMayoProductivoConMaduro\t2.330413773349191\namoal\t0.0\nتجديد_عقد_القحطاني_والشلهوب\t1.505149978319906\nELTOQUE\t0.6020599913279624\n何人でも投票ok\t2.0\n鳥海浩輔生誕祭2014\t2.374748346010104\n22Years\t0.7781512503836436\nReto\t2.0718820073061255\nالسيسي_يصف_ابو_متعب_بكبير_العرب\t1.5563025007672873\nlv178854516\t0.0\nASOT\t2.173186268412274\nannemveben\t1.1760912590556813\nuncategorized\t2.2121876044039577\nrufflesbags\t2.5854607295085006\nThinkLikeAMan2\t1.2787536009528289\nnyamnyam\t1.3222192947339193\nsavethebees\t2.2833012287035497\nBibleTrivia\t1.5440680443502757\nImpacto_Informativo\t0.6989700043360189\nlernsomethingneweveryday\t0.9030899869919435\n在日特権\t1.845098040014257\nVillahermosa\t2.5634810853944106\ndidi\t1.0791812460476249\nLookoftheday\t1.6020599913279625\ngatito\t1.6532125137753437\nPAST\t1.041392685158225\ncuernavaca\t1.9030899869919435\nInstaAbracito\t0.0\n限定\t2.45178643552429\nGotOneCoach\t0.0\nVenezuelaPotenciaEconomica\t2.568201724066995\ndahSyatnyaSongSis\t1.3617278360175928\nkembaliMerantau\t0.0\nFlower\t2.9566485792052033\nGetItRight\t1.5563025007672873\nOnGOD\t0.9542425094393249\nwingingit\t1.255272505103306\nUstedEstáRePailaSi\t1.8195439355418688\nHumTech2014\t0.7781512503836436\nDoinMe\t0.9030899869919435\n高松大樹\t0.6989700043360189\nBatmobile\t2.6532125137753435\nEverythingToMe\t0.3010299956639812\nscarylucy\t0.0\nCallofDuty\t2.164352855784437\nXU\t0.47712125471966244\nRichardsPartyof2\t0.0\nGNAZISDignosEsbirrosDeLaPaz\t1.8920946026904804\nキスマイファンRT\t2.089905111439398\nwank\t2.7075701760979363\nGS現地してくれる人RT\t1.8976270912904414\nWCAPD\t0.47712125471966244\nGIS\t2.399673721481038\nUtah\t3.0670708560453703\nCobrasBicampeones\t1.2787536009528289\n17MDelPilarALaRomareda\t1.8920946026904804\nSingaporeNeedsWWAT\t0.47712125471966244\nSAVEJOGJAGRAFFITI\t1.8692317197309762\nダイヤのA好きな人RT\t1.8260748027008264\nXVII\t1.0\nsouthyorkshire\t2.482873583608754\nGreatManchesterRun\t1.792391689498254\nprimarevapop2014\t0.0\nEverythingWillBeOK\t0.0\n早口言葉\t2.03342375548695\nDRPS\t0.47712125471966244\nأسف_ياريس\t0.9542425094393249\nFIER\t1.462397997898956\nAbrazoaIker\t1.568201724066995\nbastianbintangdilangit\t1.8512583487190752\n多少違っても許してね\t0.0\n学校に携帯を持って行って見つかった時の言い訳\t0.0\nHerkesBuTagdaSenNerdesin\t3.0557604646877348\nSNCF\t2.756636108245848\nAshleyHebert\t0.0\ngetmetobarcelona\t0.0\nSimplyScottSquad\t1.8573324964312685\ngethype\t1.3010299956639813\nPuteadaDeCancha\t1.7993405494535817\nمن_كثر_الشبوك_ماعاد_تلاقي_أرض\t2.3010299956639813\nمكياج_عروسة\t1.462397997898956\nFixerUpper\t1.863322860120456\nElimdeOlsaydı\t1.6532125137753437\nhoysebebe\t0.9542425094393249\nbedavainternet\t1.2787536009528289\nHANTAM\t1.041392685158225\nChelfie\t0.6989700043360189\nMorelia\t2.5646660642520893\nCTOD\t1.0791812460476249\nLaLuzDeCandela\t1.8388490907372552\ngoktendondurmayagsa\t1.462397997898956\nÉsPrimavera\t0.7781512503836436\n空知英秋2014\t1.3617278360175928\nBeerporn\t0.47712125471966244\nIveteSangaloNoRockInRioLisboa\t1.1139433523068367\nPsoe\t1.6127838567197355\nSIDONIA_anime\t2.9552065375419416\nwerq\t0.9542425094393249\nBucks\t2.4927603890268375\nCBDFW\t0.0\nwhatonearth\t1.041392685158225\nElPressentiment\t0.0\nالقصب\t1.8692317197309762\nbrands\t2.603144372620182\nなんかいいとおもったらRT\t1.414973347970818\nVoterID\t2.303196057420489\nمن_اعظم_ما_يقول_ابوي\t2.625312450961674\nbizav\t1.792391689498254\nFOOTFETISH\t1.6989700043360187\nstreetpastorsconf\t0.47712125471966244\nHBD19thKepoQueenTetehMuha\t1.2041199826559248\nsolaire2ne1\t0.7781512503836436\nOhSehunID1stGA\t2.0293837776852097\nUniIsStressingMeOut\t0.0\nSince1998\t0.0\nBanksy\t2.41161970596323\nCunts\t1.5563025007672873\nSNH48\t2.0253058652647704\njustyourluck\t0.0\nkzl\t1.1760912590556813\nK\t3.1595671932336202\nshirakuma\t1.2041199826559248\nBenceBayanlar\t2.167317334748176\nMMMYEAH\t2.948412965778601\nLALITEBANCO\t0.0\nipl2014\t2.4885507165004443\nفيلا_للبيع\t0.3010299956639812\nTheChamp\t1.5314789170422551\nlovelock\t0.6989700043360189\nTorresSeleccion\t1.8750612633917\nالحشمة1435\t1.4471580313422192\nBGM\t2.2624510897304293\nDEARLORD\t2.037426497940624\nVote2014\t2.8756399370041685\nLesChosesBougent\t0.3010299956639812\nمغرد_حببك_بتويتر_وشوفته_تريحك\t1.9493900066449128\ntravelexperience\t0.0\nウオーターサーバー\t1.7403626894942439\nmedicare\t2.093421685162235\nNebula\t1.7708520116421442\nMEMBERS\t2.8095597146352675\nيجيك_شعور_حلو_إذا\t2.9334872878487053\nlariiiiii\t0.0\nAskTrethany\t2.357934847000454\ndengerdenger\t0.0\n기적\t2.949877704036875\nhydrate\t1.792391689498254\nlv181481975\t0.0\nREDTokyo\t1.9444826721501687\nlacrosse\t2.27415784926368\nkkr\t2.320146286111054\nPaterna\t1.9138138523837167\nEHMAHGERD\t0.7781512503836436\n1L\t1.2304489213782739\nsmtlive\t1.6020599913279625\nStangBang\t0.3010299956639812\nEPNvsMéxico\t1.255272505103306\nHeaven\t2.893206753059848\n少しでもいいなって思ったらフォロー又はRT\t0.8450980400142568\nما_لا_تعرف_في_كرة_القدم\t0.9030899869919435\nDoddFrank\t1.3010299956639813\nrealitytv\t1.792391689498254\ncraftcms\t0.9542425094393249\nDZ\t2.012837224705172\nTEDTalks\t2.3010299956639813\nヤンデレ\t2.4983105537896004\nメガネ男子をはるとRTされると聞いたので\t1.6901960800285136\n5j\t0.8450980400142568\nconditionersapply\t0.0\naskjustinj\t0.6989700043360189\nBelieveMovieDVD\t1.568201724066995\nالجزيرة_تسيئ_للسعودية_من_جديد\t1.0\nBelleMovie\t1.7708520116421442\nashtonbringbackthedamnglassesfollowparty\t0.8450980400142568\nXativa\t1.3222192947339193\nSelfiekingkongpalahotakko\t0.0\n黒バス好きもRT\t0.47712125471966244\nSalserin\t1.041392685158225\n千棘の誕生日を祝ってくれる人RT\t0.3010299956639812\nタイヤ\t2.0043213737826426\nHappyDechaDay\t0.0\nolddoulci\t0.0\nteamuk\t0.9542425094393249\n見たことあるひとRT\t1.2304489213782739\ngoskins\t0.6989700043360189\nサンジ\t2.173186268412274\nOLoHacesTuOLoHagoYo\t3.6267508536833932\nfamilia\t3.0346284566253203\n11月3日はかぶき町の女王であり銀魂のゲロイン神楽の誕生日\t0.0\nListas\t2.792391689498254\nsgpolitics\t1.6532125137753437\nmasturbating\t3.2022157758011316\n有無リク王はきちがい\t0.47712125471966244\nCSR\t2.693726948923647\nJanneDaArc\t2.12057393120585\n限定ウパル\t1.462397997898956\nしあるちゃんは死にました\t1.3979400086720377\nmaquinafinanciera\t0.3010299956639812\nSaltLakeCity\t2.5211380837040362\nparamedics\t1.3979400086720377\nCassieGGSdiSCTV\t0.3010299956639812\nStudentLife\t1.6812412373755872\nWorcester\t2.5658478186735176\nRaiderLove\t0.0\nAdaptiveDesign\t0.0\nハッピー\t1.6020599913279625\ngirlfuck\t1.8325089127062364\nHappyBdayDeibLohrEnrile\t1.3010299956639813\nUberSeQueda\t1.845098040014257\nEnginAkyurekArgentina\t1.0\nBanquet\t1.146128035678238\nMargotLoyola\t1.462397997898956\nSAFETY\t1.505149978319906\nEMABiggestFans1D\t1.568201724066995\ntraintragedy\t0.47712125471966244\nMoorMusicLaunch\t1.2787536009528289\nGirlsGeneration8thAnniversery\t1.1139433523068367\nsome\t2.012837224705172\nnormalizebreastfeeding\t1.2304489213782739\nWhileEatingBreakFast\t0.3010299956639812\nbrutalinfectionalliance\t0.0\n19DAYS\t2.041392685158225\ndts\t2.494154594018443\nLancs\t1.4913616938342726\nINFOGRAPHIC\t2.2671717284030137\nSEXYGIRLS\t1.5314789170422551\nشاورما_لندن\t1.9493900066449128\nKalmunityTuesday\t0.0\nRTから気になった人お迎えいきます\t1.9395192526186185\nStopYourBurn\t1.591064607026499\nrichienuzz\t0.6989700043360189\nbiting\t1.3617278360175928\nالهلي\t2.4082399653118496\nmodasustentavel\t0.0\nSosokIbu\t2.9273703630390235\nCombateEsBacán\t1.146128035678238\naquelasarrada\t0.0\nあともふbot\t1.3222192947339193\nJuntosPorLa13\t2.3096301674258988\nPojokSatu\t3.9318137039591394\nプリシラ\t2.0253058652647704\nSweetcharity\t0.47712125471966244\nfitnessgoal\t1.505149978319906\nclandestins\t1.414973347970818\nパーナさんスルー禁止\t2.534026106056135\nBプロ\t3.143014800254095\nHappyBirthdayLouis\t2.4149733479708178\nCASTLE\t1.6232492903979006\nPEA\t1.041392685158225\n禁断ボーイズ\t2.093421685162235\n当日券\t0.9030899869919435\nPhysician\t2.717670503002262\nLitMasEvE\t1.6334684555795866\nhijablondon\t0.0\nlaMudDejoElPelero\t0.0\n女王様\t2.161368002234975\npainters\t1.6434526764861874\nHOSHI\t2.1583624920952498\n安田章大の誕生日までに911RT目指す\t2.568201724066995\n1ファボ10km\t0.0\npinkcres\t0.0\nTopAlbums2016\t1.716003343634799\nco246769\t0.3010299956639812\nBenches\t0.6989700043360189\nep3_M\t3.239549720840473\nisitthursdayyet\t0.7781512503836436\nQuotesPorn\t0.9542425094393249\nReformaEnergetica\t2.406540180433955\ncmkpre\t1.7403626894942439\nモンスト販売\t2.5599066250361124\nテギョン\t2.530199698203082\nSupportKECreatives\t1.4913616938342726\nEnDirecto\t2.569373909615046\nSOOMPIEAWARDS\t2.1492191126553797\npequenosgigantes\t0.47712125471966244\n24時間以内に300RT来なければ俺の嫁\t2.2764618041732443\nWEREWOLF\t1.4913616938342726\nARMYVietNam\t0.3010299956639812\nマーガレット・ロセッティ\t1.6127838567197355\nバトスピ\t2.2380461031287955\ngordongang\t0.0\nHARMONIZERS\t1.9030899869919435\nJuntaCivicoMilitarYA\t2.952792443044092\nspoil\t2.146128035678238\nForMePlusYouOUTNOW\t2.783903579272735\nThisTown\t2.4608978427565478\nunpresidented\t2.2624510897304293\n受験生乃木ヲタＲＴ\t0.0\nDGCIMBuscaAMaspero\t2.294466226161593\n病み垢さんと繋がりたい\t2.7664128471123997\nAYB_Azhar\t0.3010299956639812\nTopMusicUK\t1.8573324964312685\nMMKBlindBalladeer\t2.738780558484369\nMBSラジオ\t1.3010299956639813\neuroptours\t0.0\nRock50\t0.47712125471966244\nMadonnaSebastian\t1.3617278360175928\nSira\t0.8450980400142568\nstill\t2.287801729930226\nglobo\t2.593286067020457\ncliqueart\t2.8813846567705728\nDogFinder\t2.250420002308894\nkosyokai\t0.0\nASTRO\t2.6848453616444123\nعايض_القرني\t1.8750612633917\nEMPOWER\t2.294466226161593\nfog\t2.4927603890268375\nturnbackHOAX\t0.0\n特典\t2.0681858617461617\nالاسمرالغريب\t0.8450980400142568\ntweetjukebox\t2.5390760987927767\nالاسعار\t1.7481880270062005\nTrendPartyAlert\t1.8692317197309762\nطلال_سلامة\t0.9030899869919435\nmotortrade\t1.041392685158225\nMotivateChu\t0.0\nوکیل_نہیں_قیادت_بدلو\t1.8325089127062364\nالدولة_المارقة\t1.6901960800285136\neveryday\t2.6857417386022635\nSmackDownLIVE\t2.0863598306747484\nلقطهَ_اباحيهَ_بقناهَ_بدايهَ\t1.380211241711606\nfashiondesigner\t2.0043213737826426\nPMK\t0.7781512503836436\nSaham\t1.7403626894942439\nrebelião\t0.6020599913279624\nLaikliğiSavunmakSuçDeğildir\t2.3783979009481375\nミリオンライブ\t1.4471580313422192\nعِشرين_مليون_تنقذ_الشمري\t0.7781512503836436\nARMYS\t1.5563025007672873\nFoxCities\t0.8450980400142568\nBestFanAmry\t3.0689276116820716\nSomeoneTellRaila\t1.9395192526186185\nvsu20\t0.9542425094393249\nフォローバック90\t0.0\nマリオさん\t0.0\nMayourKhi\t0.0\nHanover\t1.9294189257142929\nدندنه\t0.9542425094393249\nStydia\t2.2405492482825995\nA2017Bidco\t1.4471580313422192\nFuelPrices\t0.0\nColossusBets\t1.9912260756924949\n1970s\t2.0644579892269186\n小林由依好きな人RT\t1.3222192947339193\nALTHEATVCES\t0.0\nالامير_فارس_\t0.0\nيافاطمة_الزهراء\t0.6989700043360189\nMASORONUR\t0.7781512503836436\nhandicapped\t1.7853298350107671\nrekruiteasy\t1.5563025007672873\nいきなりステーキ\t1.0791812460476249\nPrasInimigasDigo\t2.225309281725863\nايباااه\t0.3010299956639812\nぁぃぁぃ生誕祭\t0.0\nEFCU23\t0.9030899869919435\nUyumakİsterdimAma\t2.255272505103306\nややちbot\t0.6020599913279624\nsexymexicanboy\t1.041392685158225\nعطر_الليل\t2.0086001717619175\nTolakProvokasiGNPF\t2.1702617153949575\nほうれい線ヤバ\t1.0791812460476249\nجبران_عواجي_بدون_بدل_خطر\t0.7781512503836436\n井上由莉耶\t1.6901960800285136\nTentangJempolers\t2.346352974450639\nliban\t1.3424226808222062\nCopeElche\t0.0\n8Ene\t1.8325089127062364\ntimetouncorkandunwined\t0.0\n絶対に笑ってはいけない松野家24時\t1.8976270912904414\nبعرعر\t0.0\n正月気分\t0.6989700043360189\ncergy\t0.8450980400142568\nnolovuelvohacer\t0.3010299956639812\nséries\t2.850033257689769\n懲りない面々\t0.0\n福沢諭吉生誕祭2017\t1.9637878273455551\nThessaloniki\t1.9030899869919435\n弱ペダ\t2.2624510897304293\nTacoEmojiEngine\t1.4313637641589874\nCrisis\t2.496929648073215\nSAO_JOSE\t0.0\nاسحب_تفويضك_من_بلحه\t2.214843848047698\nsharingiscaring\t2.1072099696478683\nDJNahni4GhDJAwards\t0.0\nVoteJoyGwendo\t0.8450980400142568\nEntrepreneurship\t2.756636108245848\n彩雲国物語\t1.6127838567197355\nMikeMcCoy\t0.7781512503836436\nAndrewOKeefe\t0.0\nBuzzfeed\t2.204119982655925\nblackish\t2.782472624166286\nパン\t2.428134794028789\nElBolsón\t1.4771212547196624\nTrumpPence16\t2.230448921378274\nRTされた数だけランク上がるまでガチャ禁\t0.3010299956639812\nEmpathicKryptonite\t0.0\nDécla\t2.7795964912578244\naruba\t1.7481880270062005\nwehavethecc1vibe\t1.9822712330395684\nInfografia\t1.7853298350107671\nchibi\t1.9912260756924949\nWinwin\t1.9242792860618816\nاللهم_اشف_نوره_العنزي\t2.8555191556678\nMicroBizMattersDay\t2.037426497940624\nKiralıkaşk\t1.2041199826559248\nsm30421013\t2.330413773349191\nformerrichgirlproblems\t0.6020599913279624\nMicrowaveGang\t0.0\nsexvideo\t2.711807229041191\nH82\t0.0\njustice4MarkTuan\t2.0863598306747484\nGamingCards\t0.8450980400142568\nUttarayan\t1.3222192947339193\nBloggingGirls\t0.0\nHKNJfiringSoon\t1.8260748027008264\nダッシュ斉藤中６日\t0.3010299956639812\nAlexisSánchez\t1.0\nOculusTouch\t1.0791812460476249\nスカルガールズ\t0.47712125471966244\nSTRONGER\t0.9030899869919435\nمزاجي_للرتويت\t0.6020599913279624\nIdol_Jihen\t0.8450980400142568\nfoxy\t1.8512583487190752\nلا_للاعدام\t2.0043213737826426\nألأمير_أغرد_44k_محب\t0.0\nbalianeseculture\t0.0\nBahuSantosh\t0.0\npresidentillegitimate\t0.0\n肥満\t1.5314789170422551\nbijintokei\t2.0644579892269186\nاللورد_الليدي_للدعم\t0.0\n3P\t1.9294189257142929\ntsaon3\t1.9444826721501687\nrememberingrhinos\t0.3010299956639812\nCrossdress\t1.7558748556724915\nSaksiTakut\t1.9395192526186185\nRealAction\t0.0\nAnimalAlphabets\t1.3010299956639813\nwwpschat\t0.47712125471966244\nGerekYok\t2.100370545117563\nterremoto\t2.593286067020457\nTwitter上にいる政宗くんのリベンジ好き全員と繋がるのが密かな夢だったりするのでとりあえずこれを見た政宗くんのリベンジ好きはRTもしくはフォローしてくれたら全力でフォローしに行きます\t2.322219294733919\nGingerByDJAtech\t1.2041199826559248\nKerber\t1.662757831681574\nAttali\t1.041392685158225\nMidnightXAtlanta\t1.9777236052888478\nTOP40\t2.2095150145426308\nNexTrack\t1.8976270912904414\n梶裕貴生誕祭2017\t1.9590413923210936\nطالب_علم_العقيدة\t0.3010299956639812\nThankYouKexols\t1.591064607026499\nhplatex\t0.0\nTacoHat\t0.0\nنصف_دقيقة\t2.1583624920952498\nSdvComBenderEMagnata\t1.568201724066995\nFuckFriday\t2.2430380486862944\nBestseller\t3.0034605321095067\n相互100\t2.12057393120585\nSAgrad\t1.2787536009528289\nTeamRetweet\t4.395396294000116\nauction\t3.6245914591268478\n1RTもこなかったら2人ともおれの嫁\t0.3010299956639812\nأحمد_ياسين\t1.7242758696007892\nいろいろなOORer\t0.3010299956639812\nmelão\t0.0\ncspaceman\t1.041392685158225\nNuncaMas\t2.5327543789924976\npotroast\t0.6989700043360189\nمتابعيني_الاوفياء\t0.0\nعبدالرحمن_بن_مساعد\t3.17260293120986\nUniteBlue\t3.787531316127234\nソシ好きな方全員と繋がりたいですソシが好きな方でRTかフォローしてくれたら100ぱーフォローしに飛んで行きますそして今繋がってるフォロワさんもRTで拡散していただけると嬉しいです\t3.287129620719111\nSelfImprovement\t1.9344984512435677\nMedallaBellasArtes\t0.0\nعلاج_تشققات_البشرة\t0.3010299956639812\nVoteForChange\t1.8920946026904804\n28Maret2014\t0.0\nDirenOyyokhirsiza\t1.5440680443502757\nConferencia\t1.7242758696007892\nairmax\t2.5185139398778875\n3inarow\t1.716003343634799\nfeelfreetojoin\t0.0\nsaleup70\t0.0\n通販\t3.2390490931401916\nGEMINI\t3.0726174765452368\nApartment\t2.450249108319361\narmstreaty\t0.8450980400142568\nTwinTowers\t1.2787536009528289\nclase20\t0.0\nvéridique\t1.0\nSfoxwriting\t0.3010299956639812\npso2\t2.8739015978644615\nguyswithstyle\t0.9030899869919435\nMamaFeliz\t0.47712125471966244\nAngelina\t1.3222192947339193\nEAAK\t1.5314789170422551\nKnowWhereYouStand\t0.0\nCaatingagrande\t0.0\nSarıgüleTeşekkürler\t2.2695129442179165\ntoilettweet\t0.9030899869919435\n海洋堂応募\t1.1139433523068367\ninspiracion\t1.568201724066995\nBasmaNarazHai\t0.7781512503836436\nkyo\t1.146128035678238\ntimeismoney\t1.2787536009528289\nHUKADJobs\t0.0\nカテゴリー\t2.0530784434834195\nエロ動画\t3.9944051466891666\n卓球部あるある\t1.6901960800285136\nmantaPKS\t1.99563519459755\nBitch\t2.5538830266438746\nscifi\t3.4878451201114355\nvegalta\t2.5403294747908736\nNervios\t2.3096301674258988\nSimplePlan\t1.5563025007672873\nttt\t1.6720978579357175\nセクゾチケット\t2.232996110392154\nタマノフRT\t0.7781512503836436\n360ucv\t3.3736474722092176\nmatius\t0.0\nFutureStudent\t0.0\nتخاريف\t1.568201724066995\nCalegKreatif\t1.7403626894942439\nAshtonIrwinTo2Million\t1.8325089127062364\nNasiGudegMeruya\t4.018534070428183\nرايات_الحسين\t0.6020599913279624\nwheels\t2.100370545117563\nSLvInd\t1.568201724066995\nconflictos\t1.0791812460476249\nMOTOrun\t0.0\nholyshit\t2.0718820073061255\nnjtbus\t0.0\ntoughdayattheoffice\t0.9542425094393249\nNeverForget\t3.4056877866727775\nSkilledTrade\t2.741151598851785\ntxlatechcamp14\t0.6989700043360189\ndelicioso\t1.8260748027008264\nBravoYourLifeKwon\t1.6720978579357175\nNoAlDialogoConElTitereDeCuba\t2.747411807886423\nContentment\t1.2787536009528289\n西木野真姫\t2.7323937598229686\nLetsGetWanOut\t0.0\nlucy\t1.8260748027008264\npengalamandi2in\t0.0\noneyearofparamore\t0.47712125471966244\nkillme\t2.5171958979499744\nfatkidproblems\t1.3979400086720377\nRodillaEnCola\t1.462397997898956\nkaraparaaşk\t1.9493900066449128\nNielsGiffey\t0.47712125471966244\nGR14\t1.5563025007672873\nRTした人を真面目に語る\t1.255272505103306\nPintoPolicía\t1.2041199826559248\n沿岸バス\t1.7708520116421442\nESCRIBIRTIENE\t0.0\noldarchitecture\t0.0\nParalelGalatasaray\t2.3364597338485296\nbeardgamestrong\t0.6020599913279624\nＧＡＩＮ\t3.218010042984363\nsega_wlw\t1.9084850188786497\nAllinforNewark\t0.3010299956639812\nShemalePerfection\t0.6020599913279624\nFF_A7la_Specialツ\t3.6658623002031554\nNFSmovie\t0.7781512503836436\nKeepSmilingAshtonWeLoveYou\t3.13640344813399\ncheekybitches\t0.0\nGTA5\t2.988112840268352\nAgeas\t0.3010299956639812\nشبكة_مسلم\t1.4471580313422192\nEbileteHAYIR\t2.8651039746411278\nthenhappyhour\t0.0\nGabrielBagon\t0.6020599913279624\nUnDíaComoHoy\t3.2140486794119414\nseguiteavosmismo\t0.0\nNuevaCédula\t0.8450980400142568\nvintagechild\t0.0\namericanidol\t2.03342375548695\nSilet\t0.3010299956639812\n16ALaCandelitaSoyYo\t0.6020599913279624\nphotograph\t2.5658478186735176\nフォロワーさんのフォロワーさんで私のこと気になってる人いませんかwwwwいませんねwwwwwせっかくなので好きな飲み物言う\t2.450249108319361\nweirdo\t2.4638929889859074\nAprilSnow\t0.7781512503836436\nMyPhoneRIOInvasionDanielPadilla\t1.9084850188786497\nFelizJuevesSanto\t1.8750612633917\nこの人が泣いてたら慰める人RT\t0.6989700043360189\nwineandpopcorn\t0.9542425094393249\nFansChoice\t2.392696953259666\nWW2\t3.0232524596337114\ngoingthruit\t1.7993405494535817\nMoevation\t2.0492180226701815\nنطالب_بفرقة_هيئة_لكل_عائلة_لحفظ_أعراضنا\t1.2041199826559248\nbenim\t1.9294189257142929\nnbpoli\t2.161368002234975\nMaghribReminder\t0.3010299956639812\nconseil\t1.7075701760979363\nLEquipe\t1.1760912590556813\nBIGANNOUNCEMENT\t0.6989700043360189\nPORvsHOU\t1.9138138523837167\nGASTRONOMIACREATIVADELINDA\t0.0\nproductive\t2.4742162640762553\nMoto2\t2.45178643552429\nساير_الرشيدي_بحاجتك_يابو_متعب\t0.0\npositive\t3.09795107099415\n鉄音まいぼっと\t2.3783979009481375\nこの人達がいないと生きていけない人rt\t0.6020599913279624\nレトルト\t1.7558748556724915\n上野\t2.9585638832219674\nopenSAP\t1.146128035678238\nEfervescencia\t1.0791812460476249\nİcimdekiCocuğaNot\t1.6232492903979006\n91年組eighter\t1.8195439355418688\nحملة_الغاء_اختبار_كفايات\t3.406540180433955\nBIRTHDAY\t3.000867721531227\nFoco\t2.2405492482825995\nEC2014\t1.3979400086720377\nYukNanya\t1.146128035678238\nشخصيا\t0.6020599913279624\nRcirno_bot\t0.9542425094393249\nsundaylibrarian\t0.0\nUKBIMcrew\t0.0\nぽあメモ\t0.0\nlogies2014\t2.187520720836463\nTakpanasKe\t0.3010299956639812\nNoMakeup\t1.9444826721501687\nMotoGPTermas\t1.2787536009528289\nThanksOneDirectionForChangingOurLives\t3.06595298031387\nDoraemonPic\t2.550228353055094\nİbniSina2014\t0.3010299956639812\nميادة_أشرف\t1.505149978319906\nNotHuman\t4.34551095769695\nルミナスハーツ\t2.784617292632875\neveryoneon\t0.0\nTotal\t1.9084850188786497\n俺が寂しそうにしてたら後ろから優しく抱き締めてくれる人rtそっと抱き上げベッドまで連れて行き襲っちゃう人ふぁぼ\t1.9542425094393248\nduniacewe\t1.7323937598229686\nJadgoNetJadoluyor\t1.2304489213782739\nascot\t1.5563025007672873\nسآآم\t0.0\nWolverine\t2.3961993470957363\nsm23444188\t0.0\nうちの子に着せたいやらせたいことがあれば教えてください\t0.3010299956639812\nHAIM\t1.3010299956639813\npOvOq\t1.7558748556724915\n双子の鬼徹クラスタ見つかるまでRT\t0.0\nزواج_مصر_أمريكا\t0.3010299956639812\nyumyum\t2.1986570869544226\nBenceKitapOkumak\t2.7331972651065692\nPactoProK\t0.0\naskDrMax\t0.0\nabsurd\t2.8102325179950842\nshockedness\t0.0\nعبدالله_شعبك_يحبك\t1.792391689498254\nSanderTHS\t0.0\nالسلف_الصالح\t1.146128035678238\nメカクシティアクターズ見てる人RT\t2.4638929889859074\nTinkerBell\t1.0791812460476249\nTEAMB\t1.99563519459755\nlugano\t1.0791812460476249\npromshots\t1.662757831681574\nnights\t1.8388490907372552\nOutlookAntibiotics\t0.7781512503836436\nhomersimpsonproblems\t0.0\nスタラン参戦した人\t0.3010299956639812\nせーら\t0.3010299956639812\nゴッチーノ\t0.0\nAIahoy\t0.0\n外人\t1.7075701760979363\nمعتقلي_المنامة\t0.9030899869919435\nmaroc\t2.3404441148401185\nHarrisburg\t2.113943352306837\nVoilaVoilaTour\t2.2278867046136734\nScottsdaleAZ\t1.7993405494535817\npengganas\t0.0\niscifilmlerifestivali\t0.3010299956639812\ncordobaESP\t0.9030899869919435\nHebrews\t1.255272505103306\nJohnnyManziel\t2.155336037465062\nbaaddin\t0.0\ntypw\t0.0\nKORBAN\t0.3010299956639812\nSanLeandro\t1.462397997898956\nImABzzAgent\t1.7558748556724915\nshitjesssays\t0.3010299956639812\nHoySaleElSol\t1.7481880270062005\nKembalikanWaktuTidurKami\t0.8450980400142568\ntiffanyblue\t1.4771212547196624\nhumbled\t2.1789769472931693\nkedsredtour\t3.1693804953119495\nQueroSeguidoresFacilComLukinhasDasTretas\t2.1789769472931693\nGeoTravellers\t1.9344984512435677\nverano\t2.8115750058705933\nこの3人歌うまいと思う人RT\t0.9542425094393249\n群馬\t2.550228353055094\nverdade\t1.6020599913279625\nبيت\t2.582063362911709\nraydolls\t0.47712125471966244\nohyesabhi\t0.0\nlikealways\t1.7853298350107671\nspeedway\t2.0530784434834195\nFCBIMksStore\t0.0\nARSENAL\t3.0178677189635055\nSalimosrelindos\t0.0\nニコ生JKミスコン\t3.0948203803548\nenhancement\t1.505149978319906\nおしゃれカフェ\t1.9084850188786497\ninstayo\t1.1760912590556813\nشنو_اكثر_شي_يعجبك_بنفسك\t0.9542425094393249\nImThatGirlfriend\t2.797959643737196\nPDNTTRGOM\t1.0\nنفسى_اصرخ_واقول\t2.598790506763115\nthode\t0.0\nمسيار\t2.255272505103306\nMequieromorir\t0.0\nmtyfollow\t2.530199698203082\nYoungRy\t0.0\nwefPH\t0.47712125471966244\ncuentapublica\t2.0644579892269186\nادم\t2.0530784434834195\nhortoinfantilmunicipal\t0.0\nKötüBirİnsanOlsaydım\t2.303196057420489\nIndustria\t1.6334684555795866\nAnálisisTécnico\t0.9030899869919435\nعربي21\t2.4727564493172123\nInésJiménez\t0.0\nconfissoesdamanha\t0.0\nrekkacopy\t2.0043213737826426\nJottaANossoOrgulho\t1.2787536009528289\nLoveRacing\t1.568201724066995\njacobcometovancouver\t0.0\nModiMinistry\t2.8692317197309762\ndaninoegiveaway\t1.414973347970818\nURBANMODELS\t0.3010299956639812\nteamclub17\t0.0\n反核燃サイクル\t1.380211241711606\nASOSYALGUNESileTAKİPLEŞELİM\t0.9030899869919435\nBirthdayGirl\t2.0170333392987803\nLotsaLove\t0.6989700043360189\nAbdullahCömert\t1.845098040014257\nfinland\t2.4216039268698313\ngetmethere\t0.8450980400142568\noyasumi\t2.1931245983544616\ngibson335\t0.0\nRateMeHot\t1.1760912590556813\ntosh\t1.6720978579357175\nyouthsoccer\t2.376576957056512\nWWENetwork\t2.8318697742805017\nallyadvice\t1.9444826721501687\nrimjob\t2.5477747053878224\nAlwaysBelieve\t2.0211892990699383\nstevejobs\t1.8573324964312685\nsm23364835\t0.0\nSenior2014\t1.2304489213782739\nSinsSerif\t0.0\nFutbolunAnlamlıGünü\t2.0863598306747484\nPostYourDrafts\t1.8750612633917\nTornarem\t1.6434526764861874\nMyRingsMyStyle\t1.591064607026499\ncarfix\t0.3010299956639812\nGünesliYarınlarİçin\t0.3010299956639812\nvss\t2.615950051656401\nFaktaLibra\t2.0453229787866576\nursula\t1.0\noitpoints\t2.3263358609287517\nاﻻنبار\t1.7403626894942439\nPrep\t1.5185139398778875\narea241\t0.0\nCLIC\t0.8450980400142568\nMedfordnj\t0.3010299956639812\nLaCarcelDeTwitter\t1.7075701760979363\n6652c8b4fbe5d062de23e75ba1eb7f53\t0.0\nTheRealOnes\t0.3010299956639812\nشي_يعفس_مزاجك\t2.3820170425748683\nhuelga\t1.7481880270062005\nBuktiCEKFAVORIT\t1.3617278360175928\nإرحل_ياعبدالرحمن_بن_مساعد\t0.9542425094393249\n"
+          },
+          {
+            "type": "HTML",
+            "data": "<div class=\"result-alert alert-warning\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Output is truncated</strong> to 1000 rows. Learn more about <strong>zeppelin.spark.maxResult</strong></div>\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:39153/jobs/job?id=16",
+              "$$hashKey": "object:10430"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:39153/jobs/job?id=17",
+              "$$hashKey": "object:10431"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647950014309_835731575",
+      "id": "paragraph_1647950014309_835731575",
+      "dateCreated": "2022-03-22T11:53:34+0000",
+      "dateStarted": "2022-03-22T13:38:46+0000",
+      "dateFinished": "2022-03-22T13:40:31+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8309"
+    },
+    {
+      "text": "%sql\nselect * from df_his_2 ORDER BY log_count DESC LIMIT 100 ;",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T17:55:27+0000",
+      "progress": 4,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "sql"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "scatterChart",
+              "height": 294,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "single_hashtag": "string",
+                      "log_count": "string"
+                    },
+                    "updated": true
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "single_hashtag",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "log_count",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "single_hashtag\tlog_count\nMTVHottest\t5.78647883812161\ngameinsight\t5.70019732188344\niHeartAwards\t5.577733007553452\nandroidgames\t5.458350742139663\nVideoMTV2016\t5.4548387646045855\nRTした人全員フォローする\t5.436528382122099\nBestFanArmy\t5.426163035580809\nandroid\t5.368539762227824\nNOW2016\t5.344981413927258\nRT\t5.3378803726268185\nipadgames\t5.242146209492416\nRETWEET\t5.222505774219741\nالسعودية\t5.209973194720954\nsougofollow\t5.183816283638807\nNBLNabilaVoto\t5.16639162660105\nipad\t5.157958168800533\n相互フォロー\t5.153860577147255\nالهلال\t5.148932568594521\nopenfollow\t5.126310025697545\nKCA\t5.0854975057528975\nTeamFollowBack\t5.050283063734752\nالرياض\t5.037629652422657\nرتويت\t5.029651577678799\n拡散希望\t5.0186422560373725\nNowPlaying\t5.0128751711088695\nتطبيق_قرآنى\t5.012702277300403\nQuran\t5.008174184006426\nLove\t4.978290104241024\nFOLLOWBACK\t4.963957735423843\nالنصر\t4.961871766990156\nNOWOneDirection\t4.960251910277592\nfollowme\t4.949624169742913\nnowplaying\t4.94780119714398\nトレクル\t4.94571471405986\nTuitUtil\t4.932499131604639\nFOLLOWTRICK\t4.929265618253066\nporn\t4.928339513233456\nﷺ\t4.916448684342482\nآسرع_رتويت\t4.912524947035385\nAndroid\t4.910197369966001\nTeamBTS\t4.907959258055133\nANDROID\t4.892884522551015\n相互希望\t4.888308695565653\nsex\t4.8878366424080655\nLovatics\t4.874458623783367\nVideoVeranoMTV\t4.858621401632482\nまとめ\t4.851961214374638\niphone\t4.845228308819484\nالاتحاد\t4.8450235831494455\nMGWV\t4.841090299698502\nسكس\t4.839754499992019\njob\t4.814500638415482\nSOOMPIAWARDS\t4.813000206854505\nFOLLOW\t4.810366953681625\nTeamEXO\t4.808055598740809\nnews\t4.804616416987255\nNOWFifthHarmony\t4.8043507330267765\nnp\t4.802889977545398\nHadith\t4.800215150733914\nTEAMFOLLOWBACK\t4.785379669223175\nSoundCloud\t4.783739259159507\nFF\t4.772629711805652\nTeamSuperJunior\t4.767319159799848\nwin\t4.76510203824216\nEpicMobClothing\t4.758927024346265\nBestMusicVideo\t4.750624088449305\nLittleMonsters\t4.747240853338565\nfollowmejp\t4.746494081342589\nBeliebers\t4.744136452401247\nfollowback\t4.7424108805804925\nريتويت\t4.73851102207967\nfree\t4.737502742312274\njobs\t4.716687653215402\nTreCru\t4.704262080142849\nheatOneDirection\t4.703205370695486\nTFBJP\t4.700383501596293\nالكويت\t4.694201424500871\nMPN\t4.693225550582132\nGAIN\t4.6927764398090615\nizmirescort\t4.692732384332512\nfollow\t4.689237803089119\niphonegames\t4.686698817461056\nquote\t4.681639158298093\niPad\t4.679645897695205\nlove\t4.677944403430593\nTFB\t4.6698001942542025\nBIGOLIVE\t4.668646787798657\nجدة\t4.665796677689494\nmusic\t4.664425714510839\nselfie\t4.65856465026156\nNBAVote\t4.654965451235502\nنشر_سيرته\t4.647510109796988\nTeamGOT7\t4.643423064489274\nVote1DUK\t4.6324066721623\nHarmonizers\t4.626309565255671\nモンスト\t4.623414704409385\nقطر\t4.620594061756146\nغرد_بصورة\t4.6093489154530305\nfashion\t4.608654377512099\nNews\t4.602233674386428\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:39153/jobs/job?id=22",
+              "$$hashKey": "object:10533"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:39153/jobs/job?id=23",
+              "$$hashKey": "object:10534"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647957752220_873958880",
+      "id": "paragraph_1647957752220_873958880",
+      "dateCreated": "2022-03-22T14:02:32+0000",
+      "dateStarted": "2022-03-22T14:05:36+0000",
+      "dateFinished": "2022-03-22T14:07:04+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8310"
+    },
+    {
+      "text": "val df9 = df8.limit(2)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T16:15:49+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf9\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [user_id_a: bigint, user_id_b: bigint ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647965741546_405571876",
+      "id": "paragraph_1647965741546_405571876",
+      "dateCreated": "2022-03-22T16:15:41+0000",
+      "dateStarted": "2022-03-22T16:15:50+0000",
+      "dateFinished": "2022-03-22T16:15:50+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8311"
+    },
+    {
+      "text": "df9.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T16:15:56+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+----------+----------+------------------+\n|user_id_a| user_id_b|commonTags|     hashtag_score|\n+---------+----------+----------+------------------+\n|     5556| 145206677|        15| 2.791759469228055|\n|     5556|1957432028|        18|3.1972245773362196|\n+---------+----------+----------+------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40355/jobs/job?id=5",
+              "$$hashKey": "object:10648"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40355/jobs/job?id=6",
+              "$$hashKey": "object:10649"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:40355/jobs/job?id=7",
+              "$$hashKey": "object:10650"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647965752557_1108088473",
+      "id": "paragraph_1647965752557_1108088473",
+      "dateCreated": "2022-03-22T16:15:52+0000",
+      "dateStarted": "2022-03-22T16:15:56+0000",
+      "dateFinished": "2022-03-22T19:39:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8312"
+    },
+    {
+      "title": "write hashtag",
+      "text": "import org.apache.spark.sql.functions.lower\nimport java.util.Properties\nimport java.sql.DriverManager\n\n\n// set credentials\nval jdbcPort = \"3306\"\nval jdbcDatabase = \"twitter_db\"\nval jdbcUsername = \"root\"\nval jdbcPassword = \"CHANGE_ME\"   // the password you set\n\nval jdbcHostname = \"52.3.222.218\"// the external IP address of you MySQL DB\n\nval jdbcUrl =s\"jdbc:mysql://$jdbcHostname:$jdbcPort/$jdbcDatabase\"\n\nval driverClass = \"com.mysql.jdbc.Driver\"\nClass.forName(driverClass)  // check jdbc driver\n\n// set connection properties\nval connectionProperties = new Properties()\nconnectionProperties.put(\"user\", s\"$jdbcUsername\")\nconnectionProperties.put(\"password\", s\"$jdbcPassword\")\nconnectionProperties.setProperty(\"Driver\", driverClass)\nconnectionProperties.setProperty(\"useServerPrepStmts\", \"false\")    // take note of this configuration, and understand what it does\nconnectionProperties.setProperty(\"rewriteBatchedStatements\", \"true\")  // take note of this configuration, and understand what it does\n\n// first drop the table if it already exists\nval connection = DriverManager.getConnection(jdbcUrl, jdbcUsername, jdbcPassword)\nassert(!connection.isClosed)\nval stmt = connection.createStatement()\nval tableName = \"hashtag_score\"\nstmt.executeUpdate(\"drop table if exists $tableName\")\n\n// write the dataframe to a table called \"biz_review\"\ndf8.write.jdbc(jdbcUrl, s\"$tableName\", connectionProperties)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T21:20:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.spark.SparkException: Job 4 cancelled part of cancelled job group zeppelin|anonymous|2GZWKMHSC|paragraph_1647812575384_1708631468\n  at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2259)\n  at org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:2155)\n  at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleJobGroupCancelled$4(DAGScheduler.scala:1048)\n  at scala.runtime.java8.JFunction1$mcVI$sp.apply(JFunction1$mcVI$sp.java:23)\n  at scala.collection.mutable.HashSet.foreach(HashSet.scala:79)\n  at org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:1047)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2408)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2388)\n  at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2377)\n  at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)\n  at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:868)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2204)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2225)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2244)\n  at org.apache.spark.SparkContext.runJob(SparkContext.scala:2269)\n  at org.apache.spark.rdd.RDD.$anonfun$foreachPartition$1(RDD.scala:1020)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n  at org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n  at org.apache.spark.rdd.RDD.foreachPartition(RDD.scala:1018)\n  at org.apache.spark.sql.execution.datasources.jdbc.JdbcUtils$.saveTable(JdbcUtils.scala:854)\n  at org.apache.spark.sql.execution.datasources.jdbc.JdbcRelationProvider.createRelation(JdbcRelationProvider.scala:82)\n  at org.apache.spark.sql.execution.datasources.SaveIntoDataSourceCommand.run(SaveIntoDataSourceCommand.scala:46)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:70)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:68)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:90)\n  at org.apache.spark.sql.execution.SparkPlan.$anonfun$execute$1(SparkPlan.scala:180)\n  at org.apache.spark.sql.execution.SparkPlan.$anonfun$executeQuery$1(SparkPlan.scala:218)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:215)\n  at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:176)\n  at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:132)\n  at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:131)\n  at org.apache.spark.sql.DataFrameWriter.$anonfun$runCommand$1(DataFrameWriter.scala:989)\n  at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$5(SQLExecution.scala:103)\n  at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:163)\n  at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:90)\n  at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:775)\n  at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:64)\n  at org.apache.spark.sql.DataFrameWriter.runCommand(DataFrameWriter.scala:989)\n  at org.apache.spark.sql.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:438)\n  at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:415)\n  at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:301)\n  at org.apache.spark.sql.DataFrameWriter.jdbc(DataFrameWriter.scala:817)\n  ... 44 elided\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:33923/jobs/job?id=3",
+              "$$hashKey": "object:10716"
+            },
+            {
+              "jobUrl": "http://powerful-cluster-m.us-east1-b.c.group-phase1-m3-zeppelin.internal:33923/jobs/job?id=4",
+              "$$hashKey": "object:10717"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647812575384_1708631468",
+      "id": "paragraph_1647812575384_1708631468",
+      "dateCreated": "2022-03-20T21:42:55+0000",
+      "dateStarted": "2022-03-22T21:20:23+0000",
+      "dateFinished": "2022-03-22T23:37:46+0000",
+      "status": "ABORT",
+      "$$hashKey": "object:8313"
+    },
+    {
+      "text": "df8.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T16:10:22+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- user_id_a: long (nullable = true)\n |-- user_id_b: long (nullable = true)\n |-- commonTags: integer (nullable = false)\n |-- hashtag_score: double (nullable = true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647812694045_1152926387",
+      "id": "paragraph_1647812694045_1152926387",
+      "dateCreated": "2022-03-20T21:44:54+0000",
+      "dateStarted": "2022-03-22T16:11:19+0000",
+      "dateFinished": "2022-03-22T16:15:40+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:8314"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-22T23:57:42+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "completionKey": "TAB",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "language": "scala"
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647965423057_820580763",
+      "id": "paragraph_1647965423057_820580763",
+      "dateCreated": "2022-03-22T16:10:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:8315"
+    }
+  ],
+  "name": "phase1-toCsv",
+  "id": "2GZWKMHSC",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.1-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/phase1-toCsv"
+}

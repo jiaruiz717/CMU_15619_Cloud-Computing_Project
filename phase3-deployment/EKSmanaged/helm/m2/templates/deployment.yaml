@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: m2-deployment
+spec:
+  replicas: 9
+  selector:
+    matchLabels:
+      app: m2
+  template:
+    metadata:
+      labels:
+        app: m2
+    spec:
+      containers:
+      - name: m2
+        image: 144331934093.dkr.ecr.us-east-1.amazonaws.com/m2:vertx
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,5 @@
+variables:
+  resourceGroup: rg-dwendwen-dev
+  aksName: aks-dwendwen-dev
+  kubernetesNamespace: dwendwen-dev
+  nodeCount: '2'

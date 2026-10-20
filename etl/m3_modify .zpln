@@ -1,0 +1,1342 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "val df = spark.read.option(\"header\", \"true\").json(\"gs://public-store-bucket/BigDatasetOutputJson_DoubleCheck\")\ndf.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:25:53+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- created_at: string (nullable = true)\n |-- hashtag_list: array (nullable = true)\n |    |-- element: string (containsNull = true)\n |-- id: long (nullable = true)\n |-- in_reply_to_user_id: long (nullable = true)\n |-- is_reply: boolean (nullable = true)\n |-- is_retweet: boolean (nullable = true)\n |-- retweeted_status_user_id: long (nullable = true)\n |-- text: string (nullable = true)\n |-- user_description: string (nullable = true)\n |-- user_id: long (nullable = true)\n |-- user_screen_name: string (nullable = true)\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [created_at: string, hashtag_list: array<string> ... 9 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://m3-m.us-east1-b.c.zeppelin-primer-344315.internal:44607/jobs/job?id=2",
+              "$$hashKey": "object:7817"
+            },
+            {
+              "jobUrl": "http://m3-m.us-east1-b.c.zeppelin-primer-344315.internal:44607/jobs/job?id=3",
+              "$$hashKey": "object:7818"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818366_1459526294",
+      "id": "paragraph_1647664720474_576593454",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:4688",
+      "dateFinished": "2022-03-20T22:27:26+0000",
+      "dateStarted": "2022-03-20T22:25:53+0000"
+    },
+    {
+      "text": "df.createOrReplaceTempView(\"origin\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:26+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_1438603576",
+      "id": "paragraph_1647664851300_634186897",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4689",
+      "dateFinished": "2022-03-20T22:27:27+0000",
+      "dateStarted": "2022-03-20T22:27:26+0000"
+    },
+    {
+      "text": "val interaction_df_temp = df.map(f =>{\n    val user_id = f.getAs[Long](9)\n    val reply_to_user_id = f.getAs[Long](3)\n    val retweeted_status_user_id = f.getAs[Long](6)\n    val is_reply = f.getAs[Boolean](4)\n    val is_retweet = f.getAs[Boolean](5)\n    (user_id, reply_to_user_id,retweeted_status_user_id,is_reply,is_retweet)\n})\nval interaction_df = interaction_df_temp.toDF(\"user_id\", \"reply_to_user_id\",\"retweeted_status_id\",\"is_reply\",\"is_retweet\")\n// interaction_df.printSchema()\n// interaction_df.show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:27+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_df_temp\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[(Long, Long, Long, Boolean, Boolean)]\u001b[0m = [_1: bigint, _2: bigint ... 3 more fields]\n\u001b[1m\u001b[34minteraction_df\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_id: bigint, reply_to_user_id: bigint ... 3 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_1817293576",
+      "id": "paragraph_1647664973610_1952353483",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4690",
+      "dateFinished": "2022-03-20T22:27:27+0000",
+      "dateStarted": "2022-03-20T22:27:27+0000"
+    },
+    {
+      "text": "interaction_df.createOrReplaceTempView(\"interaction\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:27+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_2141184949",
+      "id": "paragraph_1647664973431_667066268",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4691",
+      "dateFinished": "2022-03-20T22:27:28+0000",
+      "dateStarted": "2022-03-20T22:27:27+0000"
+    },
+    {
+      "text": "val interaction_reply_view = spark.sql(\n    \"\"\"\n    SELECT * \n    FROM interaction\n    WHERE is_reply = true\n    \"\"\")\n// interaction_reply_view.printSchema()\n// interaction_reply_view.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:28+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_reply_view\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_id: bigint, reply_to_user_id: bigint ... 3 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_2123424386",
+      "id": "paragraph_1647664973266_274486207",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4692",
+      "dateFinished": "2022-03-20T22:27:28+0000",
+      "dateStarted": "2022-03-20T22:27:28+0000"
+    },
+    {
+      "text": "val interaction_retweet_view = spark.sql(\n    \"\"\"\n    SELECT * \n    FROM interaction\n    WHERE is_retweet = true\n    \"\"\")\n// interaction_retweet_view.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:28+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_retweet_view\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_id: bigint, reply_to_user_id: bigint ... 3 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_1718017348",
+      "id": "paragraph_1647664973098_1202873219",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4693",
+      "dateFinished": "2022-03-20T22:27:28+0000",
+      "dateStarted": "2022-03-20T22:27:28+0000"
+    },
+    {
+      "text": "var interaction_reply = interaction_reply_view.map(f =>{\n    val user_id = f.getAs[Long](0)\n    val reply_to_user_id = f.getAs[Long](1)\n    val user_pair: String = s\"${user_id}\\t${reply_to_user_id}\"\n    (user_pair,1)\n})\n// interaction_reply.printSchema()\n// interaction_reply.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:28+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_reply\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[(String, Int)]\u001b[0m = [_1: string, _2: int]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_690290356",
+      "id": "paragraph_1647664972893_723588962",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4694",
+      "dateFinished": "2022-03-20T22:27:29+0000",
+      "dateStarted": "2022-03-20T22:27:28+0000"
+    },
+    {
+      "text": "interaction_reply.createOrReplaceTempView(\"interaction_reply\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:29+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_989087572",
+      "id": "paragraph_1647664972686_481248426",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4695",
+      "dateFinished": "2022-03-20T22:27:29+0000",
+      "dateStarted": "2022-03-20T22:27:29+0000"
+    },
+    {
+      "text": "val interaction_reply_agg = spark.sql(\n    \"\"\"\n    SELECT _1 AS user_pair, SUM(_2) AS reply_count\n    FROM interaction_reply\n    GROUP BY user_pair\n    ORDER BY reply_count DESC\n    \"\"\")\n// interaction_reply_agg.show()    ",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:29+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_reply_agg\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_pair: string, reply_count: bigint]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_577147673",
+      "id": "paragraph_1647664969938_1529819131",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4696",
+      "dateFinished": "2022-03-20T22:27:29+0000",
+      "dateStarted": "2022-03-20T22:27:29+0000"
+    },
+    {
+      "text": "var interaction_retweet = interaction_retweet_view.map(f =>{\n    val user_id = f.getAs[Long](0)\n    val retweeted_status_user_id = f.getAs[Long](2)\n    val user_pair: String = s\"${user_id}\\t${retweeted_status_user_id}\"\n    (user_pair,1)\n})\n// interaction_retweet.printSchema()\n// interaction_retweet.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:29+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_retweet\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[(String, Int)]\u001b[0m = [_1: string, _2: int]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_1331568877",
+      "id": "paragraph_1647664969789_170993735",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4697",
+      "dateFinished": "2022-03-20T22:27:30+0000",
+      "dateStarted": "2022-03-20T22:27:29+0000"
+    },
+    {
+      "text": "interaction_retweet.createOrReplaceTempView(\"interaction_retweet\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:30+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_23701436",
+      "id": "paragraph_1647665052686_916444741",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4698",
+      "dateFinished": "2022-03-20T22:27:30+0000",
+      "dateStarted": "2022-03-20T22:27:30+0000"
+    },
+    {
+      "text": "val interaction_retweet_agg = spark.sql(\n    \"\"\"\n    SELECT _1 AS user_pair, SUM(_2) AS retweet_count\n    FROM interaction_retweet\n    GROUP BY user_pair\n    ORDER BY retweet_count DESC\n    \"\"\")\n// interaction_retweet_agg.show()  ",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:30+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_retweet_agg\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_pair: string, retweet_count: bigint]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_1305339775",
+      "id": "paragraph_1647665051571_1250520993",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4699",
+      "dateFinished": "2022-03-20T22:27:30+0000",
+      "dateStarted": "2022-03-20T22:27:30+0000"
+    },
+    {
+      "text": "interaction_retweet_agg.createOrReplaceTempView(\"interaction_retweet_agg\")\ninteraction_reply_agg.createOrReplaceTempView(\"interaction_reply_agg\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:30+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_1570713926",
+      "id": "paragraph_1647665050605_1245661363",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4700",
+      "dateFinished": "2022-03-20T22:27:31+0000",
+      "dateStarted": "2022-03-20T22:27:30+0000"
+    },
+    {
+      "text": "val interaction_agg = spark.sql(\n    \"\"\"\n    SELECT \n    CASE WHEN reply.user_pair IS NULL THEN retweet.user_pair\n    ELSE reply.user_pair\n    END AS user_pair,\n    CASE WHEN reply_count IS NULL THEN 0\n    ELSE reply_count\n    END AS reply_count,\n    CASE WHEN retweet_count IS NULL THEN 0\n    ELSE retweet_count\n    END AS retweet_count\n    FROM interaction_retweet_agg AS retweet\n    FULL OUTER JOIN interaction_reply_agg AS reply\n    ON retweet.user_pair = reply.user_pair\n    \"\"\")\n// interaction_agg.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:31+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_agg\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_pair: string, reply_count: bigint ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818367_1062338293",
+      "id": "paragraph_1647665048469_419440551",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4701",
+      "dateFinished": "2022-03-20T22:27:31+0000",
+      "dateStarted": "2022-03-20T22:27:31+0000"
+    },
+    {
+      "text": "interaction_agg.createOrReplaceTempView(\"interaction_agg\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:31+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_2117689827",
+      "id": "paragraph_1647664969614_1732980986",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4702",
+      "dateFinished": "2022-03-20T22:27:31+0000",
+      "dateStarted": "2022-03-20T22:27:31+0000"
+    },
+    {
+      "text": "val interaction_agg_pair = interaction_agg.map(f => {\n    val user_pair: String = f.getAs[String](0)\n    val first_user: Long = user_pair.split(\"\\t\")(0).toLong\n    val second_user: Long = user_pair.split(\"\\t\")(1).toLong\n    val small_user: Long = if(first_user < second_user) first_user else second_user\n    val big_user: Long= if(small_user == first_user) second_user else first_user\n    val join_user_pair: String = s\"${small_user}\\t${big_user}\"\n    val reply_count: Long = f.getAs[Long](1)\n    val retweet_count: Long = f.getAs[Long](2)\n    (join_user_pair, reply_count, retweet_count)\n})\n// interaction_agg_pair.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:31+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_agg_pair\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[(String, Long, Long)]\u001b[0m = [_1: string, _2: bigint ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_134194594",
+      "id": "paragraph_1647665112747_1632978905",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4703",
+      "dateFinished": "2022-03-20T22:27:32+0000",
+      "dateStarted": "2022-03-20T22:27:31+0000"
+    },
+    {
+      "text": "interaction_agg_pair.createOrReplaceTempView(\"interaction_agg_pair\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:32+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_742183952",
+      "id": "paragraph_1647665112096_815796188",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4704",
+      "dateFinished": "2022-03-20T22:27:32+0000",
+      "dateStarted": "2022-03-20T22:27:32+0000"
+    },
+    {
+      "text": "val interaction_agg_pair_join = spark.sql(\n    \"\"\"\n    SELECT _1 AS user_pair, SUM(_2) AS reply_count, SUM(_3) AS retweet_count\n    FROM interaction_agg_pair\n    GROUP BY user_pair\n    ORDER BY reply_count+retweet_count DESC\n    \"\"\")\n// interaction_agg_pair_join.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:32+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34minteraction_agg_pair_join\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [user_pair: string, reply_count: bigint ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_271477462",
+      "id": "paragraph_1647665128396_1468573541",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4705",
+      "dateFinished": "2022-03-20T22:27:32+0000",
+      "dateStarted": "2022-03-20T22:27:32+0000"
+    },
+    {
+      "text": "import scala.math._\nval interaction_result = interaction_agg_pair_join.map(f =>{\n    val user_pair: String = f.getAs[String](0)\n    val user_1: Long = user_pair.split(\"\\t\")(0).toLong\n    val user_2: Long = user_pair.split(\"\\t\")(1).toLong\n    val reply_count: Long = f.getAs[Long](1)\n    val retweet_count: Long = f.getAs[Long](2)\n    val interaction_score = Math.log(1 + 2*reply_count + retweet_count)\n    (user_1, user_2, interaction_score)\n})",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:32+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import scala.math._\n\u001b[1m\u001b[34minteraction_result\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[(Long, Long, Double)]\u001b[0m = [_1: bigint, _2: bigint ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_806252937",
+      "id": "paragraph_1647665111438_59434405",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4706",
+      "dateFinished": "2022-03-20T22:27:32+0000",
+      "dateStarted": "2022-03-20T22:27:32+0000"
+    },
+    {
+      "text": "import java.util.Properties\nimport java.sql.DriverManager\n\n// set credentials\nval jdbcPort = \"3306\"\nval jdbcDatabase = \"twitter_db\"\nval jdbcUsername = \"root\"\nval jdbcPassword = \"CHANGE_ME\"   // the password you set\n// val jdbcHostname = \"a4c029f1e58ca489d9fcb2a370532e39-1904823454.us-east-1.elb.amazonaws.com\"   // the external IP address of you MySQL DB\nval jdbcHostname = \"a85e1f47f2963440fa7a4b7b6d0bd19f-544985636.us-east-1.elb.amazonaws.com\"\n\nval jdbcUrl =s\"jdbc:mysql://$jdbcHostname:$jdbcPort/$jdbcDatabase\"\n\nval driverClass = \"com.mysql.jdbc.Driver\"\nClass.forName(driverClass)  // check jdbc driver\n\n// set connection properties\nval connectionProperties = new Properties()\nconnectionProperties.put(\"user\", s\"$jdbcUsername\")\nconnectionProperties.put(\"password\", s\"$jdbcPassword\")\nconnectionProperties.setProperty(\"Driver\", driverClass)\nconnectionProperties.setProperty(\"useServerPrepStmts\", \"false\")    // take note of this configuration, and understand what it does\nconnectionProperties.setProperty(\"rewriteBatchedStatements\", \"true\")  // take note of this configuration, and understand what it does\n\n// first drop the table if it already exists\nval connection = DriverManager.getConnection(jdbcUrl, jdbcUsername, jdbcPassword)\nassert(!connection.isClosed)\nval stmt = connection.createStatement()\nval tableName = \"interaction_score\"\nstmt.executeUpdate(\"drop table if exists $tableName\")\n\n// write the dataframe to a table called \"biz_review\"\n interaction_result.write.jdbc(jdbcUrl, s\"$tableName\", connectionProperties)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:41:13+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import java.util.Properties\nimport java.sql.DriverManager\n\u001b[1m\u001b[34mjdbcPort\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = 3306\n\u001b[1m\u001b[34mjdbcDatabase\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = twitter_db\n\u001b[1m\u001b[34mjdbcUsername\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = root\n\u001b[1m\u001b[34mjdbcPassword\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = CHANGE_ME\n\u001b[1m\u001b[34mjdbcHostname\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = a85e1f47f2963440fa7a4b7b6d0bd19f-544985636.us-east-1.elb.amazonaws.com\n\u001b[1m\u001b[34mjdbcUrl\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = jdbc:mysql://a85e1f47f2963440fa7a4b7b6d0bd19f-544985636.us-east-1.elb.amazonaws.com:3306/twitter_db\n\u001b[1m\u001b[34mdriverClass\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = com.mysql.jdbc.Driver\n\u001b[1m\u001b[34mconnectionProperties\u001b[0m: \u001b[1m\u001b[32mjava.util.Properties\u001b[0m = {user=root, password=CHANGE_ME, Driver=com.mysql.jdbc.Driver, rewriteBatchedStatements=true, useServerPre...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://m3-m.us-east1-b.c.zeppelin-primer-344315.internal:44607/jobs/job?id=4",
+              "$$hashKey": "object:8107"
+            },
+            {
+              "jobUrl": "http://m3-m.us-east1-b.c.zeppelin-primer-344315.internal:44607/jobs/job?id=5",
+              "$$hashKey": "object:8108"
+            },
+            {
+              "jobUrl": "http://m3-m.us-east1-b.c.zeppelin-primer-344315.internal:44607/jobs/job?id=6",
+              "$$hashKey": "object:8109"
+            },
+            {
+              "jobUrl": "http://m3-m.us-east1-b.c.zeppelin-primer-344315.internal:44607/jobs/job?id=7",
+              "$$hashKey": "object:8110"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_20616890",
+      "id": "paragraph_1647665110643_1831993049",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4707",
+      "dateFinished": "2022-03-20T23:02:06+0000",
+      "dateStarted": "2022-03-20T22:41:13+0000"
+    },
+    {
+      "text": "// val distinct_user_pair_df = interaction_agg_pair_join.map(f =>{\n//     val user_pair: String = f.getAs[String](0)\n//     (user_pair)\n// }).cache()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:33+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_365252933",
+      "id": "paragraph_1647665109826_878065870",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4708",
+      "dateFinished": "2022-03-20T22:27:33+0000",
+      "dateStarted": "2022-03-20T22:27:33+0000"
+    },
+    {
+      "text": "// def exclude_popular(array: Array[String], popular_array: Array[String]): Array[String] = {\r\n//     var result: Array[String] = Array()\r\n//     val array_to_lowercase = array.map(v => v.toLowerCase())\r\n//     array_to_lowercase.foreach(element => {\r\n//       if (!popular_array.contains(element)) {\r\n//         result :+= element\r\n//       }\r\n//     })\r\n//     return result\r\n//   }",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:33+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_1473168552",
+      "id": "paragraph_1647665108951_2092799055",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4709",
+      "dateFinished": "2022-03-20T22:27:33+0000",
+      "dateStarted": "2022-03-20T22:27:33+0000"
+    },
+    {
+      "text": "// def get_hashtag_array(user: Long): Array[String]={\n//     val hashtag_list_df = spark.sql(s\"select hashtag_list from origin where user_id = $user\")\n//     var hashtag_array: Array[String] = Array()\n\n//     hashtag_list_df.take(hashtag_list_df.count.toInt).foreach(row => {\n//         val size = row.getList(0).size()\n//         for(i <- 0 to size-1){\n//             hashtag_array :+= row.getList(0).get(i)\n//         }\n//     })\n//     return hashtag_array\n// }",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:33+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_1665585424",
+      "id": "paragraph_1647665107920_1770585822",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4710",
+      "dateFinished": "2022-03-20T22:27:33+0000",
+      "dateStarted": "2022-03-20T22:27:33+0000"
+    },
+    {
+      "text": "// def common_hashtag(small: Array[String], big: Array[String]): Long={\r\n//     if(small.isEmpty || big.isEmpty){\r\n//         return 0\r\n//     }\r\n//     val small_temp = small.map(v => v.toLowerCase()).map((_,1)).groupBy(_._1).map(x=>(x._1,x._2.size))\r\n//     val big_temp = big.map(v => v.toLowerCase()).map((_,1)).groupBy(_._1).map(x=>(x._1,x._2.size))\r\n//     val small_df = small_temp.toSeq.toDF(\"tag\", \"count\")\r\n//     val big_df = big_temp.toSeq.toDF(\"tag\", \"count\")\r\n//     small_df.createOrReplaceTempView(\"small\")\r\n//     big_df.createOrReplaceTempView(\"big\")\r\n//     val join_df = spark.sql(\r\n//         \"\"\"\r\n//         SELECT small.tag AS tag, small.count+big.count AS count\r\n//         FROM small INNER JOIN big\r\n//         ON small.tag = big.tag\r\n//         \"\"\")\r\n//     try{\r\n//         return join_df.agg(sum(\"count\")).first.getLong(0)\r\n//     }catch {\r\n//         case e: NullPointerException => {\r\n//             println(join_df.agg(sum(\"count\")).first)\r\n//             return 0\r\n//         }\r\n//     }\r\n// }",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:33+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_1551516713",
+      "id": "paragraph_1647664969443_710977001",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4711",
+      "dateFinished": "2022-03-20T22:27:34+0000",
+      "dateStarted": "2022-03-20T22:27:33+0000"
+    },
+    {
+      "text": "// val array: Array[String] = Array(\"A\", \"a\", \"b\", \"BS\")\n// val popular_array: Array[String] = Array(\"A\", \"Bs\", \"c\").map(v => v.toLowerCase())\n// val common = common_hashtag(array, popular_array)\n// // val result_test = exclude_popular(array, popular_array)",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_877985862",
+      "id": "paragraph_1647667975795_650398778",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4712",
+      "dateFinished": "2022-03-20T22:27:34+0000",
+      "dateStarted": "2022-03-20T22:27:34+0000"
+    },
+    {
+      "text": "// val excluded_hashtag_array = spark.sparkContext.textFile(\"gs://m3demo/popular_hashtags.txt\").collect().map(v => v.toLowerCase())",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_303492811",
+      "id": "paragraph_1647667518056_1056858854",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4713",
+      "dateFinished": "2022-03-20T22:27:34+0000",
+      "dateStarted": "2022-03-20T22:27:34+0000"
+    },
+    {
+      "text": "// // option 1: map hashtag_score_rdd, this may be faster\n// val distinct_user_pair_rdd = distinct_user_pair_df.rdd\n// val hashtag_score_rdd = distinct_user_pair_rdd.take(distinct_user_pair_rdd.count().toInt).map(f => {\n//     val small_user: Long = f.split(\"\\t\")(0).toLong\n//     val big_user: Long = f.split(\"\\t\")(1).toLong\n//     val small_user_hashtag_array: Array[String] = get_hashtag_array(small_user)\n//     val big_user_hashtag_array: Array[String] = get_hashtag_array(big_user)\n//     val small_user_hashtag_array_exclude_popular = exclude_popular(small_user_hashtag_array, excluded_hashtag_array) \n//     val big_user_hashtag_array_exclude_popular = exclude_popular(big_user_hashtag_array, excluded_hashtag_array)  \n//     val num_of_common_hashtag = common_hashtag(small_user_hashtag_array_exclude_popular, big_user_hashtag_array_exclude_popular)\n//     val hashtag_score = if (small_user == big_user || num_of_common_hashtag <= 10) 1 else 1+Math.log(1+num_of_common_hashtag-10)\n//     (small_user,big_user,hashtag_score)\n// })\n// val hashtag_result = hashtag_score_rdd.toSeq.toDF(\"small\", \"big\", \"score\")\n// hashtag_result.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_1958292436",
+      "id": "paragraph_1647664969218_2136572349",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4714",
+      "dateFinished": "2022-03-20T22:27:34+0000",
+      "dateStarted": "2022-03-20T22:27:34+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      }
+    },
+    {
+      "text": "\n// // option2: map hashtag_score_df, this may be slower\n// val hashtag_score_df = distinct_user_pair_df.take(distinct_user_pair_df.count().toInt).map(f => {\n//     val small_user: Long = f.split(\"\\t\")(0).toLong\n//     val big_user: Long = f.split(\"\\t\")(1).toLong\n//     val small_user_hashtag_array: Array[String] = get_hashtag_array(small_user)\n//     val big_user_hashtag_array: Array[String] = get_hashtag_array(big_user)\n//     val small_user_hashtag_array_exclude_popular = exclude_popular(small_user_hashtag_array, excluded_hashtag_array) \n//     val big_user_hashtag_array_exclude_popular = exclude_popular(big_user_hashtag_array, excluded_hashtag_array)  \n//     val num_of_common_hashtag = common_hashtag(small_user_hashtag_array_exclude_popular, big_user_hashtag_array_exclude_popular)\n//     val hashtag_score = if (small_user == big_user || num_of_common_hashtag <= 10) 1 else 1+Math.log(1+num_of_common_hashtag-10)\n//     (small_user,big_user,hashtag_score)\n// })\n// hashtag_score_df.toSeq.toDF(\"small\", \"big\", \"score\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818369_289906208",
+      "id": "paragraph_1647695548569_1923730074",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4715",
+      "dateFinished": "2022-03-20T22:27:34+0000",
+      "dateStarted": "2022-03-20T22:27:34+0000"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818370_2011111461",
+      "id": "paragraph_1647695548494_285511314",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4716"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818370_1680678281",
+      "id": "paragraph_1647695548444_570257322",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4717"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818370_1971636071",
+      "id": "paragraph_1647695548389_1080933927",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4718"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818370_590685876",
+      "id": "paragraph_1647695541728_2093613893",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4719"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818370_1331178793",
+      "id": "paragraph_1647664969030_468208032",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4720"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818370_937127687",
+      "id": "paragraph_1647664968738_306527755",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4721"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-20T22:27:34+0000",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1647814818370_1887749042",
+      "id": "paragraph_1647664968260_1785221814",
+      "dateCreated": "2022-03-20T22:20:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:4722"
+    }
+  ],
+  "name": "m3_modify",
+  "id": "2GYZN8MYA",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview2",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/m3_modify"
+}

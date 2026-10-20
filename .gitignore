@@ -1,0 +1,18 @@
+/web/mix_jooby/target/
+
+# Local credentials, Terraform state, IDE files, and generated output
+.env
+.env.*
+!.env.example
+*.tfstate
+*.tfstate.*
+.terraform/
+.idea/
+.vs/
+*.iml
+**/target/
+**/bin/
+**/obj/
+node_modules/
+__pycache__/
+*.pyc

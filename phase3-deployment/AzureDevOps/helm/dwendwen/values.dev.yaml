@@ -1,0 +1,7 @@
+services:
+  m1: { replicas: 1 }
+  m2: { replicas: 1 }
+  m3: { replicas: 1 }
+  mix: { replicas: 1 }
+gateway:
+  replicas: 1

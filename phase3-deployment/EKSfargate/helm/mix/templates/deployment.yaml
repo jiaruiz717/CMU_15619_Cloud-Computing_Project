@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mix-deployment
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: mix
+  template:
+    metadata:
+      labels:
+        app: mix
+    spec:
+      containers:
+      - name: mix
+        image: 144331934093.dkr.ecr.us-east-1.amazonaws.com/mix:jooby
+        resources:
+          requests:
+            memory: "4G"
+            cpu: "2"
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: mix-config

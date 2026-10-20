@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: m3-deployment
+spec:
+  replicas: 9
+  selector:
+    matchLabels:
+      app: m3
+  template:
+    metadata:
+      labels:
+        app: m3
+    spec:
+      containers:
+      - name: m3
+        image: 144331934093.dkr.ecr.us-east-1.amazonaws.com/m3:vertx
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: m3-config

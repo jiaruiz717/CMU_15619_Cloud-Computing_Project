@@ -1,0 +1,7 @@
+variables:
+  resourceGroup: rg-dwendwen-prod
+  aksName: aks-dwendwen-prod
+  kubernetesNamespace: dwendwen-prod
+  nodeCount: '3'
+  # Separate registry for the separate production resource group.
+  acrName: replacedwendwenprodacr

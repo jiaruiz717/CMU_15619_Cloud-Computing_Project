@@ -1,0 +1,8 @@
+@host = http://localhost:8082
+
+### Empty-chain example (supported by the C# implementation)
+# Decoded input: {"chain": [], "new_tx": [], "new_target": "ffffffff"}
+GET {{host}}/blockchain?cc=eJyrVkrOSMzMU7KKjtVRykstjy-pQGInFqWnlihZKaVBgVItAIyeEHc=
+
+### Invalid payload
+GET {{host}}/blockchain?cc=invalid

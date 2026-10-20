@@ -1,0 +1,36 @@
+# Optional manual pipeline; creates ACR/AKS. Does not create/import the Twitter database.
+trigger: none
+pr: none
+parameters:
+- name: environment
+  type: string
+  default: dev
+  values: [dev, prod]
+variables:
+- template: config/common.yml
+- template: config/${{ parameters.environment }}.yml
+pool:
+  vmImage: ubuntu-22.04
+jobs:
+- deployment: Provision
+  environment: dwendwen-${{ parameters.environment }}-infrastructure
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self
+        - download: none
+        - task: AzureCLI@2
+          inputs:
+            azureSubscription: $(azureServiceConnection)
+            scriptType: bash
+            scriptLocation: scriptPath
+            scriptPath: phase3-deployment/AzureDevOps/scripts/bootstrap-azure.sh
+            visibleAzLogin: false
+          env:
+            RESOURCE_GROUP: $(resourceGroup)
+            LOCATION: $(location)
+            ACR_NAME: $(acrName)
+            AKS_NAME: $(aksName)
+            NODE_COUNT: $(nodeCount)
+            PIPELINE_PRINCIPAL_OBJECT_ID: $(pipelinePrincipalObjectId)

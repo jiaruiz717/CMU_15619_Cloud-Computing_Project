@@ -1,0 +1,7 @@
+http://reference.sailplatform.org/twitter?user_id=428940918&type=reply&phrase=kika&hashtag=Sailing
+
+http://reference.sailplatform.org/twitter?user_id=903046586&type=reply&phrase=a&hashtag=Mercer
+curl "http://localhost:8080/twitter?user_id=903046586&type=reply&phrase=a&hashtag=Mercer"
+
+http://reference.sailplatform.org/twitter?user_id=9871252&type=both&phrase=att&hashtag=Sam
+curl "http://localhost:8080/twitter?user_id=9871252&type=both&phrase=att&hashtag=Sam"

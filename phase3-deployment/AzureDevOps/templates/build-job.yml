@@ -1,0 +1,31 @@
+parameters:
+- name: service
+  type: string
+- name: stack
+  type: string
+
+jobs:
+- job: Build_${{ parameters.service }}
+  displayName: Build ${{ parameters.service }} (${{ parameters.stack }})
+  steps:
+  - checkout: self
+  - bash: bash phase3-deployment/AzureDevOps/scripts/build.sh
+    displayName: Build container (also runs on PRs without Azure login)
+    env:
+      SERVICE: ${{ parameters.service }}
+      STACK: ${{ parameters.stack }}
+      IMAGE_TAG: $(imageTag)
+  - task: AzureCLI@2
+    displayName: Push container to ACR
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), in(variables['Build.SourceBranch'], 'refs/heads/main', 'refs/heads/master'))
+    inputs:
+      azureSubscription: $(azureServiceConnection)
+      scriptType: bash
+      scriptLocation: scriptPath
+      scriptPath: phase3-deployment/AzureDevOps/scripts/push.sh
+      visibleAzLogin: false
+    env:
+      ACR_NAME: $(acrName)
+      SERVICE: ${{ parameters.service }}
+      STACK: ${{ parameters.stack }}
+      IMAGE_TAG: $(imageTag)
